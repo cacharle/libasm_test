@@ -8,13 +8,16 @@ LDFLAGS = -L$(LIBASM_PATH) -lasm
 
 NAME = runtest
 SRC = main.c ft_strlen_test.c ft_strcpy_test.c ft_strcmp_test.c \
-	  ft_write_test.c ft_read_test.c ft_strdup_test.c
+	  ft_write_test.c ft_read_test.c ft_strdup_test.c helper.c
 OBJ = $(SRC:.c=.o)
+
+run: all
+	./runtest
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(LDFLAGS) -o $@ $^
+$(NAME): libasm_all $(OBJ)
+	$(CC) $(LDFLAGS) -o $@ $(OBJ)
 
 %.o: %.c
 	$(CC) $(CCFLAGS) -c -o $@ $<
