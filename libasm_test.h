@@ -46,7 +46,9 @@ ft_list_sort(t_list **begin_list, int (*cmp)());
 void
 ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *));
 
-
+/*
+ * test_functions
+ */
 void
 ft_strlen_test(void);
 void
@@ -61,6 +63,9 @@ void
 ft_strdup_test(void);
 
 
+/*
+ * helpers
+ */
 void
 print_ok(void);
 void
@@ -68,6 +73,9 @@ print_signaled_ko(void);
 void
 expect_int(int expected, int actual);
 
+/*
+ * segfault tester
+ */
 int pid;
 bool signaled;
 
@@ -83,32 +91,14 @@ bool signaled;
 	}                                 \
 } while(0);
 
-
-// void *saved_sp;
-// bool stack_alignment_error;
-//
-// # define TEST_STACK_ALIGNMENT(x) do { \
-// 	stack_alignment_error = false; \
-// 	saved_sp = asm ("sp"); \
-// 	do { x } while(0); \
-// 	stack_alignment_error = saved_sp != asm("sp")); \
-// } while (0);
-
 char *test_name;
 
 # define TEST_ASM_FUNCTION(x) do { \
-	TEST_SEGFAULT(x); \
-	if (signaled) \
-		print_signaled_ko(); \
-	else \
-		print_ok(); \
+	TEST_SEGFAULT(x);              \
+	if (signaled)                  \
+		print_signaled_ko();       \
+	else                           \
+		print_ok();                \
 } while(0);
 
-// # define EXPECT(expected, actual) do { \
-// 	if (actual == expected) \
-// 		print_ok(); \
-// 	else \
-//    		printf("KO:	[COMPARE]: expected: \""#expected"\" got: \""#actual"\"\n", test_name); \
-// while (0);
-
-#endif
+#endif /* LIBASM_TEST_H */

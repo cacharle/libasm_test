@@ -41,5 +41,6 @@ ft_strlen_test(void)
 {
 	test_name = "ft_strlen.s";
 	ft_strlen_test_segfault();
-	ft_strlen_test_compare();
+	if (!signaled)
+		ft_strlen_test_compare();
 }
