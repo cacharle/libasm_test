@@ -2,9 +2,12 @@
 
 Unit tests for the libasm project.
 
+![example\_screenshot](./screenshot.png)
+
 ## Usage
 
-`> make run`
+- `> make` show regular pretty output.
+- `> make run_raw` show parsable output.
 
 ## Configuration
 

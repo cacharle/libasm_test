@@ -2,11 +2,13 @@
 # define LIBASM_TEST_H
 
 # include <unistd.h>
+# include <fcntl.h>
 # include <stdbool.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
 # include <sys/wait.h>
+# include <limits.h>
 # include <stddef.h>
 
 /*
@@ -83,11 +85,11 @@ bool signaled;
 	if ((pid = fork()) < 0)           \
 		exit(EXIT_FAILURE);           \
 	if (pid == 0) {                   \
-		do { x; } while(0);            \
+		do { x; } while(0);           \
 		exit(EXIT_SUCCESS);           \
 	} else {                          \
 		wait(&pid);                   \
-		signaled = WIFSIGNALED(pid);  \
+		signaled = !WIFEXITED(pid);  \
 	}                                 \
 } while(0);
 

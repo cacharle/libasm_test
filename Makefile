@@ -1,4 +1,5 @@
 RM = rm -f
+PYTHON = python3
 
 LIBASM_PATH = ../libasm
 
@@ -11,8 +12,13 @@ SRC = main.c ft_strlen_test.c ft_strcpy_test.c ft_strcmp_test.c \
 	  ft_write_test.c ft_read_test.c ft_strdup_test.c helper.c
 OBJ = $(SRC:.c=.o)
 
-run: all
-	./runtest
+run: pretty
+
+pretty: all
+	./$(NAME) | $(PYTHON) prettier.py
+
+run_raw: all
+	./$(NAME) 
 
 all: $(NAME)
 

@@ -67,6 +67,27 @@ tortor, sit amet consequat amet.");
 	FT_STRCMP_EXPECT("%c%s%p%x%X%e%f%g", "%s%p%x%X%e%f%g");
 	FT_STRCMP_EXPECT("the\0hidden", "thehidden");
 	FT_STRCMP_EXPECT("Lorem ipsum dolor st amet, consectetur adipiscing", "Lodsfsdfasdf");
+
+	FT_STRCMP_EXPECT("\x01", "\x01");
+	FT_STRCMP_EXPECT("\x02", "\x01");
+	FT_STRCMP_EXPECT("\x01", "\x02");
+	FT_STRCMP_EXPECT("\xff", "\xff");
+	FT_STRCMP_EXPECT("\xfe", "\xff");
+	FT_STRCMP_EXPECT("\xff", "\xfe");
+
+	FT_STRCMP_EXPECT("\x01\x01", "\x01");
+	FT_STRCMP_EXPECT("\x01\x02", "\x01");
+	FT_STRCMP_EXPECT("\x02\x01", "\x02");
+	FT_STRCMP_EXPECT("\xff\xff", "\xff");
+	FT_STRCMP_EXPECT("\xff\xfe", "\xff");
+	FT_STRCMP_EXPECT("\xfe\xff", "\xfe");
+
+	FT_STRCMP_EXPECT("\x01", "\x01\x01");
+	FT_STRCMP_EXPECT("\x01", "\x01\x02");
+	FT_STRCMP_EXPECT("\x02", "\x02\x01");
+	FT_STRCMP_EXPECT("\xff", "\xff\xff");
+	FT_STRCMP_EXPECT("\xff", "\xff\xfe");
+	FT_STRCMP_EXPECT("\xfe", "\xfe\xff");
 }
 
 void
