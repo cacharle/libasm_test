@@ -4,12 +4,15 @@ PYTHON = python3
 LIBASM_PATH = ../libasm
 
 CC = gcc
-CCFLAGS = -Wall -Wextra
+CCFLAGS = -I. -Wall -Wextra
 LDFLAGS = -L$(LIBASM_PATH) -lasm
 
 NAME = runtest
 SRC = main.c ft_strlen_test.c ft_strcpy_test.c ft_strcmp_test.c \
-	  ft_write_test.c ft_read_test.c ft_strdup_test.c helper.c
+	  ft_write_test.c ft_read_test.c ft_strdup_test.c helper.c \
+	  ft_atoi_base_test.c ft_list_push_front_test.c ft_list_size_test.c \
+	  ft_list_sort_test.c ft_list_remove_if_test.c \
+	  functions_reference/ref_ft_atoi_base.c
 OBJ = $(SRC:.c=.o)
 
 run: pretty

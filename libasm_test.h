@@ -64,6 +64,18 @@ ft_read_test(void);
 void
 ft_strdup_test(void);
 
+void
+ft_atoi_base_test(void);
+void
+ft_list_push_front_test(void);
+void
+ft_list_size_test(void);
+void
+ft_list_sort_test(void);
+void
+ft_list_remove_if_test(void);
+
+
 
 /*
  * helpers
@@ -74,6 +86,20 @@ void
 print_signaled_ko(void);
 void
 expect_int(int expected, int actual);
+
+/*
+ * function of reference
+ */
+int
+ref_ft_atoi_base(char *str, char *base);
+void
+ref_ft_list_push_front(t_list **begin_list, void *data);
+int
+ref_ft_list_size(t_list *begin_list);
+void
+ref_ft_list_sort(t_list **begin_list, int (*cmp)());
+void
+ref_ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *));
 
 /*
  * segfault tester

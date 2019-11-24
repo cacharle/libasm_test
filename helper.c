@@ -9,13 +9,6 @@ print_ok(void)
 }
 
 void
-print_stack_alignment_error(void)
-{
-	printf("KO: [STACK ALIGNMENT]: %s\n", test_name);
-	fflush(stdout);
-}
-
-void
 print_signaled_ko(void)
 {
 	printf("KO: [SEGFAULT]: %s\n", test_name);

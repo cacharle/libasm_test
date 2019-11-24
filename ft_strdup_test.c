@@ -5,7 +5,7 @@ static char *tmp;
 #define FT_STRDUP_EXPECT(str) do {            \
 	tmp = ft_strdup(str);                     \
 	if (tmp == NULL || strcmp(str, tmp) != 0) \
-		printf("KO:	[COMPARE]: %s: expected: \"%s\" got: \"%s\"\n", test_name, str, tmp); \
+		printf("KO: [COMPARE]: %s: expected: \"%s\" got: \"%s\"\n", test_name, str, tmp); \
 	else                                      \
 		print_ok();                           \
 	free(tmp);                                \
@@ -53,8 +53,8 @@ volutpat, eros eget rhoncus rhoncus, diam augue egestas dolor, vitae rutrum nisi
 felis sed purus. Mauris magna ex, mollis non suscipit eu, lacinia ac turpis. Phasellus\
 ac tortor et lectus fermentum lobortis eu at mauris. Vestibulum sit amet posuere\
 tortor, sit amet consequat amet.");
-	FT_STRDUP_EXPECT("\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f");
-	FT_STRDUP_EXPECT("\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f");
+	FT_STRDUP_EXPECT("\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0b\x0c\x0d\x0e\x0f");
+	FT_STRDUP_EXPECT("\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0b\x0c\x0d\x0e\x0f");
 }
 
 
