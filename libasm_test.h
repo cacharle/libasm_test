@@ -11,6 +11,8 @@
 # include <limits.h>
 # include <stddef.h>
 
+# define TO_STRING(x) #x
+
 /*
  * mandatory
  */

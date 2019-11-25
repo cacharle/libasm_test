@@ -4,8 +4,9 @@ static int expected_ret;
 static int actual_ret;
 
 #define FT_ATOI_BASE_EXPECT(str, base) do {      \
-	expected_ret = ref_ft_atoi_base(str, base);  \
+	asm("movq $0xffffffffffffffff, %rax"); \
 	actual_ret = ft_atoi_base(str, base);        \
+	expected_ret = ref_ft_atoi_base(str, base);  \
 	if (actual_ret != expected_ret)              \
 		printf("KO: [COMPARE]: %s: expected: %d got: %d with: "#str", "#base"\n", \
 				test_name, expected_ret, actual_ret); \
@@ -45,6 +46,29 @@ ft_atoi_base_segfault(void)
 	TEST_ASM_FUNCTION(ft_atoi_base("ff", "abcc"));
 	TEST_ASM_FUNCTION(ft_atoi_base("ff", ""));
 	TEST_ASM_FUNCTION(ft_atoi_base("ff", "a"));
+	TEST_ASM_FUNCTION(ft_atoi_base("-ff", "0123456789abcdef"));
+	TEST_ASM_FUNCTION(ft_atoi_base("--ff", "0123456789abcdef"));
+	TEST_ASM_FUNCTION(ft_atoi_base("+--ff", "0123456789abcdef"));
+	TEST_ASM_FUNCTION(ft_atoi_base("-++++++-+--ff", "0123456789abcdef"));
+	TEST_ASM_FUNCTION(ft_atoi_base("-++++++-+--ff\xff", "0123456789abcdef"));
+	TEST_ASM_FUNCTION(ft_atoi_base("-+\r++-+--ff\xff", "0123456789abcdef"));
+	TEST_ASM_FUNCTION(ft_atoi_base("-01", "01"));
+	TEST_ASM_FUNCTION(ft_atoi_base("--11101", "01"));
+	TEST_ASM_FUNCTION(ft_atoi_base("+-123", "01"));
+	TEST_ASM_FUNCTION(ft_atoi_base("-++++01++-+--ff", "01"));
+	TEST_ASM_FUNCTION(ft_atoi_base("-++10101\xff", "01"));
+	TEST_ASM_FUNCTION(ft_atoi_base("-+\r++-+--01\x01", "01"));
+	TEST_ASM_FUNCTION(ft_atoi_base("a\0bb", "ab"));
+	TEST_ASM_FUNCTION(ft_atoi_base("-b\0bb", "ab"));
+	TEST_ASM_FUNCTION(ft_atoi_base(" \t\n\r-++++++-+--ff\xff", "0123456789abcdef"));
+	TEST_ASM_FUNCTION(ft_atoi_base("  -+\r++-+--ff\xff", "0123456789abcdef"));
+	TEST_ASM_FUNCTION(ft_atoi_base("\n-01", "01"));
+	TEST_ASM_FUNCTION(ft_atoi_base("\x0b--11101", "01"));
+	TEST_ASM_FUNCTION(ft_atoi_base(" 755x+", "01234567"));
+	TEST_ASM_FUNCTION(ft_atoi_base(" 700chmod", "01234567"));
+	TEST_ASM_FUNCTION(ft_atoi_base(" 644yo", "01234567"));
+	TEST_ASM_FUNCTION(ft_atoi_base(TO_STRING(INT_MAX), "0123456789"));
+	TEST_ASM_FUNCTION(ft_atoi_base(TO_STRING(INT_MIN), "0123456789"));
 }
 
 static void
@@ -100,6 +124,8 @@ ft_atoi_base_compare(void)
 	FT_ATOI_BASE_EXPECT(" 755x+", "01234567");
 	FT_ATOI_BASE_EXPECT(" 700chmod", "01234567");
 	FT_ATOI_BASE_EXPECT(" 644yo", "01234567");
+	FT_ATOI_BASE_EXPECT(TO_STRING(INT_MAX), "0123456789");
+	FT_ATOI_BASE_EXPECT(TO_STRING(INT_MIN), "0123456789");
 }
 
 void
