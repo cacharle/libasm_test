@@ -6,8 +6,10 @@ main(void)
 	ft_strlen_test();
 	ft_strcpy_test();
 	ft_strcmp_test();
+#ifndef __linux__
 	ft_write_test();
 	ft_read_test();
+#endif
 	ft_strdup_test();
 
 	ft_atoi_base_test();

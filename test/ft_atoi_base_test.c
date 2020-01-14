@@ -3,8 +3,8 @@
 static int expected_ret;
 static int actual_ret;
 
+	/* asm("movq $0xffffffffffffffff, %rax"); \ */
 #define FT_ATOI_BASE_EXPECT(str, base) do {      \
-	asm("movq $0xffffffffffffffff, %rax"); \
 	actual_ret = ft_atoi_base(str, base);        \
 	expected_ret = ref_ft_atoi_base(str, base);  \
 	if (actual_ret != expected_ret)              \

@@ -24,7 +24,24 @@ ac tortor et lectus fermentum lobortis eu at mauris. Vestibulum sit amet posuere
 tortor, sit amet consequat amet."));
 }
 
-#define FT_STRCMP_EXPECT(s1, s2) expect_int(strcmp(s1, s2), ft_strcmp(s1, s2))
+int strcmp_expected;
+int strcmp_actual;
+
+#ifdef __linux__
+# define FT_STRCMP_EXPECT(s1, s2) do { \
+	strcmp_expected = strcmp(s1, s2); \
+	strcmp_actual = ft_strcmp(s1, s2); \
+	if ((strcmp_expected < 0 && strcmp_actual < 0) || \
+	    (strcmp_expected > 0 && strcmp_actual > 0) || \
+	    (strcmp_expected == 0 && strcmp_actual == 0)) \
+		print_ok(); \
+	else \
+		printf("KO: [COMPARE]: ft_strcmp.s: expected: %d got: %d\n", \
+			   strcmp_expected, strcmp_actual); \
+} while (0);
+#else
+# define FT_STRCMP_EXPECT(s1, s2) expect_int(strcmp(s1, s2), ft_strcmp(s1, s2))
+#endif
 
 static void
 ft_strcmp_test_compare(void)
