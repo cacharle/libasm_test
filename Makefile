@@ -1,18 +1,32 @@
 RM = rm -f
-PYTHON = python3
+UNAME = $(shell uname)
+
+ifeq ($(UNAME), Linux)
+	PYTHON = python3.7
+else
+	PYTHON = python3
+endif
 
 LIBASM_PATH = ../libasm
 
-CC = gcc
+CC = gcc -fPIC -no-pie
 CCFLAGS = -I. -Wall -Wextra
 LDFLAGS = -L$(LIBASM_PATH) -lasm
 
 NAME = runtest
-SRC = main.c ft_strlen_test.c ft_strcpy_test.c ft_strcmp_test.c \
-	  ft_write_test.c ft_read_test.c ft_strdup_test.c helper.c \
-	  ft_atoi_base_test.c ft_list_push_front_test.c ft_list_size_test.c \
-	  ft_list_sort_test.c ft_list_remove_if_test.c \
+SRC = main.c \
+	  helper.c \
+	  ft_strlen_test.c \
+	  ft_strcpy_test.c \
+	  ft_strcmp_test.c \
+	  ft_write_test.c \
+	  ft_read_test.c \
+	  ft_strdup_test.c \
+	  ft_atoi_base_test.c \
 	  functions_reference/ref_ft_atoi_base.c
+	  #ft_list_push_front_test.c ft_list_size_test.c \
+	  # ft_list_sort_test.c ft_list_remove_if_test.c \
+
 OBJ = $(SRC:.c=.o)
 
 run: pretty
@@ -21,23 +35,23 @@ pretty: all
 	./$(NAME) | $(PYTHON) prettier.py
 
 run_raw: all
-	./$(NAME) 
+	./$(NAME)
 
 all: $(NAME)
 
 $(NAME): libasm_all $(OBJ)
-	$(CC) $(LDFLAGS) -o $@ $(OBJ)
+	$(CC)  -o $@ $(OBJ) $(LDFLAGS)
 
 %.o: %.c
 	$(CC) $(CCFLAGS) -c -o $@ $<
 
-clean: 
+clean:
 	$(RM) $(OBJ)
 
-fclean: clean 
+fclean: clean
 	$(RM) $(NAME)
 
-re: libasm_fclean libasm_all fclean all 
+re: libasm_fclean libasm_all fclean all
 
 
 libasm_all:

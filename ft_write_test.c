@@ -14,7 +14,7 @@ static int ret;
 	ret = read(ft_write_pipe[0], buf, FT_WRITE_BUF_SIZE); \
 	buf[ret] = '\0';                                      \
 	if (strcmp(buf, str) != 0)                            \
-		printf("KO:	[COMPARE]: %s: expected: \"%s\" got: \"%s\"\n", test_name, str, buf); \
+		printf("KO: [COMPARE]: %s: expected: \"%s\" got: \"%s\"\n", test_name, str, buf); \
 	else                                                  \
 		print_ok();                                       \
 	close(ft_write_pipe[1]);                              \

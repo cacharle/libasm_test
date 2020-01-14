@@ -34,7 +34,7 @@ def parse():
         if line.find("SEGFAULT") != -1:
             name = line[4:]
         else:
-            m = re.search("^KO: \[COMPARE\]: (.*): expected: (.*) got: (.*) (with: .*)?$", line)
+            m = re.search("^KO: \[COMPARE\]: (.*): expected: (.*) got: (.*)( with: .*)?$", line)
             if m is None:
                 print(line)
                 print("PARSING ERROR")
@@ -51,8 +51,10 @@ def parse():
             "type": "COMPARE",
             "expected": m.group(2),
             "actual": m.group(3),
-            "with": m.group(4)[6:]
+            "with": None
         })
+        if m.group(4) is not None:
+            l["ko_info"][-1]["with"] = m.group(4)[6:]
         if (l["ok_counter"] + l["ko_counter"]) % 15 == 0:
             print("\n", ''.join([" " for _ in range(1 + len(name))]), end="")
         print(red("[KO] "), end="")
@@ -68,4 +70,7 @@ if __name__ == "__main__":
             if e['type'] == "SEGFAULT":
                 print(f"{k} : {red('SEGFAULT')}")
             elif e['type'] == "COMPARE":
-                print(f"{k} with {e['with']}:\n    {green('expected: ', e['expected'])}\n    {red('actual: ', e['actual'])}")
+                p = f"{k}"
+                if e["with"] is not None:
+                    p += f"with {e['with']}"
+                print(p, f":\n    {green('expected: ', e['expected'])}\n    {red('actual: ', e['actual'])}")
