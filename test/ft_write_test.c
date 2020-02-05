@@ -4,21 +4,23 @@
 
 static int ft_write_pipe[2];
 static char buf[FT_WRITE_BUF_SIZE];
+static unsigned long write_ret;
 static int ret;
 
-#define FT_WRITE_EXPECT(str) do {                         \
-	if (pipe(ft_write_pipe) < 0)                          \
-		exit(EXIT_FAILURE);                               \
-	fcntl(ft_write_pipe[0], F_SETFL, O_NONBLOCK);         \
-	ft_write(ft_write_pipe[1], str, strlen(str));         \
-	ret = read(ft_write_pipe[0], buf, FT_WRITE_BUF_SIZE); \
-	buf[ret] = '\0';                                      \
-	if (strcmp(buf, str) != 0)                            \
-		printf("KO: [COMPARE]: %s: expected: \"%s\" got: \"%s\"\n", test_name, str, buf); \
-	else                                                  \
-		print_ok();                                       \
-	close(ft_write_pipe[1]);                              \
-	close(ft_write_pipe[0]);                              \
+#define FT_WRITE_EXPECT(str) do {                                           \
+	if (pipe(ft_write_pipe) < 0)                                            \
+		exit(EXIT_FAILURE);                                                 \
+	fcntl(ft_write_pipe[0], F_SETFL, O_NONBLOCK);                           \
+	write_ret = ft_write(ft_write_pipe[1], str, strlen(str));               \
+	ret = read(ft_write_pipe[0], buf, FT_WRITE_BUF_SIZE);                   \
+	buf[ret] = '\0';                                                        \
+	if (strcmp(buf, str) != 0 || write_ret != strlen(str))                  \
+		printf("KO: [COMPARE]: %s: expected: %lu \"%s\" got: %lu \"%s\"\n", \
+				test_name, strlen(str), str, write_ret, buf);               \
+	else                                                                    \
+		print_ok();                                                         \
+	close(ft_write_pipe[1]);                                                \
+	close(ft_write_pipe[0]);                                                \
 } while (0);
 
 void

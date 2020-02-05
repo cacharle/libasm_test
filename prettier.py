@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    prettier.py                                        :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: cacharle <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/02/05 23:04:13 by cacharle          #+#    #+#              #
+#    Updated: 2020/02/05 23:07:13 by cacharle         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 import os
 import sys
 import re
@@ -31,6 +43,7 @@ def parse():
                 print("\n", ''.join([" " for _ in range(1 + len(line[4:]))]), end="")
             print(green("[OK] "), end="")
             continue
+        m = None
         if line.find("SEGFAULT") != -1:
             name = line[4:]
         else:
@@ -47,13 +60,21 @@ def parse():
             print("\n\n", name, ": ", sep="", end="")
             l = logs.get(name)
         l["ko_counter"] += 1
-        l["ko_info"].append({
-            "type": "COMPARE",
-            "expected": m.group(2),
-            "actual": m.group(3),
-            "with": None
-        })
-        if m.group(4) is not None:
+        if m is None:
+            l["ko_info"].append({
+                "type": "SEGFAULT",
+                "expected": None,
+                "actual": None,
+                "with": None
+            })
+        else:
+            l["ko_info"].append({
+                "type": "COMPARE",
+                "expected": m.group(2),
+                "actual": m.group(3),
+                "with": None
+            })
+        if m is not None and m.group(4) is not None:
             l["ko_info"][-1]["with"] = m.group(4)[6:]
         if (l["ok_counter"] + l["ko_counter"]) % 15 == 0:
             print("\n", ''.join([" " for _ in range(1 + len(name))]), end="")
@@ -73,4 +94,4 @@ if __name__ == "__main__":
                 p = f"{k}"
                 if e["with"] is not None:
                     p += f"with {e['with']}"
-                print(p, f":\n    {green('expected: ', e['expected'])}\n    {red('actual: ', e['actual'])}")
+                print(p, f":\n    {green('expected: ') + e['expected']}\n    {red('actual: ') + e['actual']}")

@@ -13,8 +13,8 @@ main(void)
 	ft_strdup_test();
 
 	ft_atoi_base_test();
-	/* ft_list_push_front_test(); */
-	/* ft_list_size_test(); */
+	ft_list_push_front_test();
+	ft_list_size_test();
 	/* ft_list_sort_test(); */
 	/* ft_list_remove_if_test(); */
 	return 0;

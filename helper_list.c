@@ -1,15 +1,23 @@
 #include "libasm_test.h"
 
-static t_list*
-create_elem(int data)
+int*
+create_data_elem(int data)
 {
 	int *data_ptr = malloc(sizeof(int));
 	if (data_ptr == NULL)
 		return (NULL);
+	*data_ptr = data;
+	return data_ptr;
+}
+
+t_list*
+create_elem(int data)
+{
 	t_list *new = malloc(sizeof(t_list));
 	if (new == NULL)
 		return NULL;
-	new->data = data_ptr;
+	if ((new->data = create_data_elem(data)) == NULL)
+		return (NULL);
 	new->next = NULL;
 	return new;
 }
@@ -39,17 +47,13 @@ list_from_format(char *fmt)
 {
 	t_list *head = NULL;
 
-	while (*fmt)
+	while (fmt != NULL && *fmt)
 	{
-		int n = ft_atoi(*fmt);
+		int n = (int)strtol(fmt, &fmt, 10);
 		t_list *elem = create_elem(n);
 		push_front(&head, elem);
-		while (isdigit(*fmt))
-			fmt++;
-		if (*fmt)
-			fmt++;
 	}
-	return head;
+	return reverse(head);
 }
 
 t_list*
@@ -66,13 +70,17 @@ list_dup(t_list *list)
 }
 
 int
-list_cmp(t_list *l1, t_list l2)
+list_cmp(t_list *l1, t_list *l2)
 {
 	if (l1 == NULL && l2 == NULL)
 		return 0;
 	if (l1 == NULL)
 		return -1;
 	if (l2 == NULL)
+		return 1;
+	if (l1->data == NULL)
+		return -1;
+	if (l2->data == NULL)
 		return 1;
 	if (*(int*)l1->data != *(int*)l2->data)
 		return *(int*)l1->data - *(int*)l2->data;
@@ -83,6 +91,20 @@ void
 list_print(t_list *list)
 {
 	while (list != NULL)
-		printf("[%d] -> ", *(int*)list->data);
-	printf("(null)\n");
+	{
+		printf("[%p] -> ", (int*)list->data);
+		list = list->next;
+	}
+	printf("(null)");
+}
+
+void
+list_destroy(t_list *list)
+{
+	if (list == NULL)
+		return ;
+	list_destroy(list->next);
+	if (list->data != NULL)
+		free(list->data);
+	free(list);
 }

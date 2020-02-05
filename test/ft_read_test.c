@@ -6,19 +6,20 @@ static int ft_read_pipe[2];
 static char buf[FT_READ_BUF_SIZE];
 static int ret;
 
-#define FT_READ_EXPECT(str) do {                           \
-	if (pipe(ft_read_pipe) < 0)                            \
-		exit(EXIT_FAILURE);                                \
-	fcntl(ft_read_pipe[0], F_SETFL, O_NONBLOCK);           \
-	write(ft_read_pipe[1], str, strlen(str));              \
-	ret = ft_read(ft_read_pipe[0], buf, FT_READ_BUF_SIZE); \
-	buf[ret] = '\0';                                       \
-	if (strcmp(buf, str) != 0)                             \
-		printf("KO: [COMPARE]: %s: expected: \"%s\" got: \"%s\"\n", test_name, str, buf); \
-	else                                                   \
-		print_ok();                                        \
-	close(ft_read_pipe[1]);                                \
-	close(ft_read_pipe[0]);                                \
+#define FT_READ_EXPECT(str) do {                                           \
+	if (pipe(ft_read_pipe) < 0)                                            \
+		exit(EXIT_FAILURE);                                                \
+	fcntl(ft_read_pipe[0], F_SETFL, O_NONBLOCK);                           \
+	write(ft_read_pipe[1], str, strlen(str));                              \
+	ret = ft_read(ft_read_pipe[0], buf, strlen(str));                      \
+	buf[ret] = '\0';                                                       \
+	if (strcmp(buf, str) != 0 || ret != strlen(str))                       \
+		printf("KO: [COMPARE]: %s: expected: %lu \"%s\" got: %d \"%s\"\n", \
+				test_name, strlen(str), str, ret, buf);                    \
+	else                                                                   \
+		print_ok();                                                        \
+	close(ft_read_pipe[1]);                                                \
+	close(ft_read_pipe[0]);                                                \
 } while (0);
 
 void

@@ -83,7 +83,6 @@ void
 ft_list_remove_if_test(void);
 
 
-
 /*
  * helpers
  */
@@ -93,6 +92,21 @@ void
 print_signaled_ko(void);
 void
 expect_int(int expected, int actual);
+
+int*
+create_data_elem(int data);
+t_list*
+create_elem(int data);
+t_list*
+list_from_format(char *fmt);
+t_list*
+list_dup(t_list *list);
+int
+list_cmp(t_list *l1, t_list *l2);
+void
+list_print(t_list *list);
+void
+list_destroy(t_list *list);
 
 /*
  * function of reference
@@ -123,7 +137,7 @@ bool signaled;
 		exit(EXIT_SUCCESS);           \
 	} else {                          \
 		wait(&pid);                   \
-		signaled = !WIFEXITED(pid);  \
+		signaled = !WIFEXITED(pid);   \
 	}                                 \
 } while(0);
 

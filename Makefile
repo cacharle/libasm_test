@@ -9,13 +9,14 @@ endif
 
 LIBASM_PATH = ../libasm
 
-CC = gcc -fPIC -no-pie
+CC = gcc
 CCFLAGS = -I. -Wall -Wextra
 LDFLAGS = -L$(LIBASM_PATH) -lasm
 
 NAME = runtest
 SRC = main.c \
 	  helper.c \
+	  helper_list.c \
 	  test/ft_strlen_test.c \
 	  test/ft_strcpy_test.c \
 	  test/ft_strcmp_test.c \
@@ -23,8 +24,11 @@ SRC = main.c \
 	  test/ft_read_test.c \
 	  test/ft_strdup_test.c \
 	  test/ft_atoi_base_test.c \
-	  functions_reference/ref_ft_atoi_base.c
-	  #ft_list_push_front_test.c ft_list_size_test.c \
+	  test/ft_list_size_test.c \
+	  test/ft_list_push_front_test.c \
+	  functions_reference/ref_ft_atoi_base.c \
+	  functions_reference/ref_ft_list_size.c \
+	  functions_reference/ref_ft_list_push_front.c
 	  # ft_list_sort_test.c ft_list_remove_if_test.c \
 
 OBJ = $(SRC:.c=.o)
@@ -32,9 +36,12 @@ OBJ = $(SRC:.c=.o)
 run: pretty
 
 pretty: all
-	./$(NAME) | $(PYTHON) prettier.py
+	./$(NAME) 2> /dev/null | $(PYTHON) prettier.py
 
 run_raw: all
+	./$(NAME) 2> /dev/null
+
+run_debug: all
 	./$(NAME)
 
 all: $(NAME)
