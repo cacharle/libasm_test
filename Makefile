@@ -6,7 +6,7 @@
 #    By: cacharle <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/08 03:06:59 by cacharle          #+#    #+#              #
-#    Updated: 2020/02/08 03:07:01 by cacharle         ###   ########.fr        #
+#    Updated: 2020/02/08 20:42:54 by cacharle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,10 +39,12 @@ SRC = main.c \
 	  test/ft_list_size_test.c \
 	  test/ft_list_push_front_test.c \
 	  test/ft_list_sort_test.c \
+	  test/ft_list_remove_if_test.c \
 	  functions_reference/ref_ft_atoi_base.c \
 	  functions_reference/ref_ft_list_size.c \
 	  functions_reference/ref_ft_list_push_front.c \
-	  functions_reference/ref_ft_list_sort.c
+	  functions_reference/ref_ft_list_sort.c \
+	  functions_reference/ref_ft_list_remove_if.c
 
 OBJ = $(SRC:.c=.o)
 

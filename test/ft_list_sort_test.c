@@ -6,13 +6,14 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:08:15 by cacharle          #+#    #+#             */
-/*   Updated: 2020/02/08 03:08:16 by cacharle         ###   ########.fr       */
+/*   Updated: 2020/02/08 20:39:51 by cacharle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm_test.h"
 
-static int compar_int(void *a, void *b)
+static int
+compar_int(void *a, void *b)
 {
 	return *(int*)a - *(int*)b;
 }
@@ -38,8 +39,8 @@ static t_list *actual;
 	list_destroy(actual);                                   \
 } while (0);
 
-t_list*
-st_merge_sorted_list(t_list* l1, t_list* l2, int (*cmp)(void *, void*));
+/* t_list* */
+/* st_merge_sorted_list(t_list* l1, t_list* l2, int (*cmp)(void *, void*)); */
 
 static void
 ft_list_sort_segfault(void)

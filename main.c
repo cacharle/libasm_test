@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:06:45 by cacharle          #+#    #+#             */
-/*   Updated: 2020/02/08 03:06:47 by cacharle         ###   ########.fr       */
+/*   Updated: 2020/02/08 20:43:51 by cacharle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ main(void)
 	ft_list_push_front_test();
 	ft_list_size_test();
 	ft_list_sort_test();
-	/* ft_list_remove_if_test(); */
+	ft_list_remove_if_test();
 	return 0;
 }
