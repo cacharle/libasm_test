@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_list_push_front_test.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/08 03:08:24 by cacharle          #+#    #+#             */
+/*   Updated: 2020/02/08 03:08:25 by cacharle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libasm_test.h"
 
 static t_list *tmp;
@@ -31,10 +43,10 @@ ft_list_push_front_segfault(void)
 	TEST_ASM_FUNCTION(tmp = list_from_format("1 2"); ft_list_push_front(&tmp, create_data_elem(0)); list_destroy(tmp));
 	TEST_ASM_FUNCTION(
 		tmp = list_from_format("1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20");
-		ft_list_push_front(tmp, create_data_elem(4));
-		ft_list_push_front(tmp, create_data_elem(4));
-		ft_list_push_front(tmp, create_data_elem(4));
-		ft_list_push_front(tmp, create_data_elem(4));
+		ft_list_push_front(&tmp, create_data_elem(4));
+		ft_list_push_front(&tmp, create_data_elem(4));
+		ft_list_push_front(&tmp, create_data_elem(4));
+		ft_list_push_front(&tmp, create_data_elem(4));
 		list_destroy(tmp);
 	);
 }
