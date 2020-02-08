@@ -6,8 +6,12 @@ Unit tests for the libasm project.
 
 ## Usage
 
-- `> make` show regular pretty output.
+- `> make run` show regular pretty output.
 - `> make run_raw` show parsable output.
+
+### Bonus
+
+Suffix all Makefile commands with `bonus` i.e `> make runbonus`.
 
 ## Configuration
 

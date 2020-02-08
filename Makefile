@@ -6,7 +6,7 @@
 #    By: cacharle <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/08 03:06:59 by cacharle          #+#    #+#              #
-#    Updated: 2020/02/08 20:42:54 by cacharle         ###   ########.fr        #
+#    Updated: 2020/02/08 21:02:52 by cacharle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,17 +49,23 @@ SRC = main.c \
 OBJ = $(SRC:.c=.o)
 
 run: pretty
+runbonus: prettybonus
 
+prettybonus: allbonus pretty
 pretty: all
 	./$(NAME) 2> /dev/null | $(PYTHON) prettier.py
 
+run_rawbonus: allbonus run_raw
 run_raw: all
 	./$(NAME) 2> /dev/null
 
+run_debugbonus: allbonus run_debug
 run_debug: all
 	./$(NAME)
 
 all: $(NAME)
+allbonus: CCFLAGS += -D LIBASM_TEST_BONUS
+allbonus: all
 
 $(NAME): libasm_all $(OBJ)
 	$(CC)  -o $@ $(OBJ) $(LDFLAGS)
