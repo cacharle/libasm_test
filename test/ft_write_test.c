@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:07:48 by cacharle          #+#    #+#             */
-/*   Updated: 2020/02/08 03:07:49 by cacharle         ###   ########.fr       */
+/*   Updated: 2020/02/23 06:24:55 by cacharle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,24 @@ static int ret;
 	close(ft_write_pipe[0]);                                                \
 } while (0);
 
+#define FT_WRITE_EXPECT_ERROR(fd, str, size) do {             \
+	write_ret = ft_write(fd, str, size);                      \
+	if ((long)write_ret != -1)                                \
+		printf("KO: [COMPARE]: %s: expected: %ld got: %ld\n", \
+				test_name, -1l, (long)write_ret);             \
+	else                                                      \
+		print_ok();                                           \
+} while (0);
+
 void
 ft_write_test_segfault(void)
 {
 	int tmp[2];
 	if (pipe(tmp) < 0)
 		exit(EXIT_FAILURE);
+	TEST_ASM_FUNCTION(ft_write(-1, "test", 5));
+	TEST_ASM_FUNCTION(ft_write(tmp[1], NULL, 5));
+	TEST_ASM_FUNCTION(ft_write(tmp[1], "test", 0));
 	TEST_ASM_FUNCTION(ft_write(tmp[1], "test", 5));
 	TEST_ASM_FUNCTION(ft_write(tmp[1], "t", 1));
 	TEST_ASM_FUNCTION(ft_write(tmp[1], "", 0));
@@ -68,6 +80,13 @@ volutpat, eros eget rhoncus rhoncus, diam augue egestas dolor, vitae rutrum nisi
 felis sed purus. Mauris magna ex, mollis non suscipit eu, lacinia ac turpis. Phasellus\
 ac tortor et lectus fermentum lobortis eu at mauris. Vestibulum sit amet posuere\
 tortor, sit amet consequat amet.");
+	
+	FT_WRITE_EXPECT_ERROR(STDOUT_FILENO, NULL, 3);
+	FT_WRITE_EXPECT_ERROR(-1, "bonjour", 7);
+	FT_WRITE_EXPECT_ERROR(42, "bonjour", 7);
+	FT_WRITE_EXPECT_ERROR(9809, "bonjour", 7);
+	FT_WRITE_EXPECT_ERROR(98123, "", 1);
+	FT_WRITE_EXPECT_ERROR(42, NULL, 7);
 }
 
 void
