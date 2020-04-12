@@ -6,11 +6,26 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:08:03 by cacharle          #+#    #+#             */
-/*   Updated: 2020/02/08 03:08:03 by cacharle         ###   ########.fr       */
+/*   Updated: 2020/04/12 20:08:08 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm_test.h"
+
+int strcmp_expected;
+int strcmp_actual;
+
+# define FT_STRCMP_EXPECT(s1, s2) do { \
+	strcmp_expected = strcmp(s1, s2); \
+	strcmp_actual = ft_strcmp(s1, s2); \
+	if ((strcmp_expected < 0 && strcmp_actual < 0) || \
+	    (strcmp_expected > 0 && strcmp_actual > 0) || \
+	    (strcmp_expected == 0 && strcmp_actual == 0)) \
+		print_ok(); \
+	else \
+		printf("KO: [COMPARE]: ft_strcmp.s: expected: %d got: %d with: "#s1", "#s2"\n", \
+			   strcmp_expected, strcmp_actual); \
+} while (0);
 
 static void
 ft_strcmp_test_segfault(void)
@@ -18,7 +33,7 @@ ft_strcmp_test_segfault(void)
 	TEST_ASM_FUNCTION(ft_strcmp("", ""));
 	TEST_ASM_FUNCTION(ft_strcmp("bon", "bon"));
 	TEST_ASM_FUNCTION(ft_strcmp("bonjour", "bonjour"));
-	TEST_ASM_FUNCTION(ft_strcmp("%c%s%p%x%X%e%f%g", "%c%s%p%x%X%e%f%g"));
+	TEST_ASM_FUNCTION(ft_strcmp("abcdefghijasdf1324''klji//", "abcdefghijasdf1324''klji//"));
 	TEST_ASM_FUNCTION(ft_strcmp("the\0hidden", "the\0hidden"));
 	TEST_ASM_FUNCTION(ft_strcmp("Lorem ipsum dolor sit amet, consectetur adipiscing\
 elit. Sed in malesuada purus. Etiam a scelerisque massa. Ut non euismod elit. Aliquam\
@@ -36,32 +51,13 @@ ac tortor et lectus fermentum lobortis eu at mauris. Vestibulum sit amet posuere
 tortor, sit amet consequat amet."));
 }
 
-int strcmp_expected;
-int strcmp_actual;
-
-#ifdef __linux__
-# define FT_STRCMP_EXPECT(s1, s2) do { \
-	strcmp_expected = strcmp(s1, s2); \
-	strcmp_actual = ft_strcmp(s1, s2); \
-	if ((strcmp_expected < 0 && strcmp_actual < 0) || \
-	    (strcmp_expected > 0 && strcmp_actual > 0) || \
-	    (strcmp_expected == 0 && strcmp_actual == 0)) \
-		print_ok(); \
-	else \
-		printf("KO: [COMPARE]: ft_strcmp.s: expected: %d got: %d\n", \
-			   strcmp_expected, strcmp_actual); \
-} while (0);
-#else
-# define FT_STRCMP_EXPECT(s1, s2) expect_int(strcmp(s1, s2), ft_strcmp(s1, s2))
-#endif
-
 static void
 ft_strcmp_test_compare(void)
 {
 	FT_STRCMP_EXPECT("", "");
 	FT_STRCMP_EXPECT("bon", "");
 	FT_STRCMP_EXPECT("bonjour", "");
-	FT_STRCMP_EXPECT("%c%s%p%x%X%e%f%g", "");
+	FT_STRCMP_EXPECT("asdklfjasdfj////asdf'''asdf3##", "");
 	FT_STRCMP_EXPECT("the\0hidden", "");
 	FT_STRCMP_EXPECT("Lorem ipsum dolor sit amet, consectetur adipiscing\
 elit. Sed in malesuada purus. Etiam a scelerisque massa. Ut non euismod elit. Aliquam\
@@ -73,7 +69,7 @@ tortor, sit amet consequat amet.", "");
 	FT_STRCMP_EXPECT("", "");
 	FT_STRCMP_EXPECT("bon", "bon");
 	FT_STRCMP_EXPECT("bonjour", "bonjour");
-	FT_STRCMP_EXPECT("%c%s%p%x%X%e%f%g", "%c%s%p%x%X%e%f%g");
+	FT_STRCMP_EXPECT("asdklfjasdfj////asdf'''asdf3##", "asdklfjasdfj////asdf'''asdf3##");
 	FT_STRCMP_EXPECT("the\0hidden", "the\0hidden");
 	FT_STRCMP_EXPECT("Lorem ipsum dolor sit amet, consectetur adipiscing\
 elit. Sed in malesuada purus. Etiam a scelerisque massa. Ut non euismod elit. Aliquam\
@@ -93,7 +89,7 @@ tortor, sit amet consequat amet.");
 	FT_STRCMP_EXPECT("", "asdf");
 	FT_STRCMP_EXPECT("bon", "bo");
 	FT_STRCMP_EXPECT("bonjour", "onjour");
-	FT_STRCMP_EXPECT("%c%s%p%x%X%e%f%g", "%s%p%x%X%e%f%g");
+	FT_STRCMP_EXPECT("asdklfjasdfj////asdf'''asdf3##", "asdklfjasdfj////asdf'''asdf3##");
 	FT_STRCMP_EXPECT("the\0hidden", "thehidden");
 	FT_STRCMP_EXPECT("Lorem ipsum dolor st amet, consectetur adipiscing", "Lodsfsdfasdf");
 

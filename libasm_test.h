@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:07:19 by cacharle          #+#    #+#             */
-/*   Updated: 2020/02/08 03:07:20 by cacharle         ###   ########.fr       */
+/*   Updated: 2020/04/12 20:06:05 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,6 @@ void
 print_ok(void);
 void
 print_signaled_ko(void);
-void
-expect_int(int expected, int actual);
 
 int*
 create_data_elem(int data);

@@ -6,7 +6,7 @@
 #    By: cacharle <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/08 03:06:59 by cacharle          #+#    #+#              #
-#    Updated: 2020/02/08 21:02:52 by cacharle         ###   ########.fr        #
+#    Updated: 2020/04/12 20:12:48 by charles          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ endif
 LIBASM_PATH = ../libasm
 
 CC = gcc
-CCFLAGS = -I. -Wall -Wextra -g
+CCFLAGS = -I. -Wall -Wextra
 LDFLAGS = -L$(LIBASM_PATH) -lasm
 
 NAME = runtest
@@ -68,7 +68,7 @@ allbonus: CCFLAGS += -D LIBASM_TEST_BONUS
 allbonus: all
 
 $(NAME): libasm_all $(OBJ)
-	$(CC)  -o $@ $(OBJ) $(LDFLAGS)
+	$(CC) -o $@ $(OBJ) $(LDFLAGS)
 
 %.o: %.c
 	$(CC) $(CCFLAGS) -c -o $@ $<
