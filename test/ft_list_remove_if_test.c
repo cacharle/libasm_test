@@ -6,20 +6,20 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:08:42 by cacharle          #+#    #+#             */
-/*   Updated: 2020/02/08 20:52:06 by cacharle         ###   ########.fr       */
+/*   Updated: 2020/04/13 14:59:22 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm_test.h"
 
-static int
-compar(void *a, void *ref)
+static
+int compar(void *a, void *ref)
 {
 	return *(int*)a - *(int*)ref;
 }
 
-static void
-free_fct(void *data)
+static
+void free_fct(void *data)
 {
 	free(data);
 }
@@ -31,8 +31,10 @@ static int i3 = 3;
 static t_list *tmp;
 static t_list *expected;
 static t_list *actual;
+static t_list *from;
 
 #define FT_LIST_REMOVE_IF_EXPECT(fmt, ref) do {              \
+	from = list_from_format(fmt);                            \
 	expected = list_from_format(fmt);                        \
 	actual = list_from_format(fmt);                          \
 	ref_ft_list_remove_if(&expected, ref, compar, free_fct); \
@@ -42,15 +44,18 @@ static t_list *actual;
 		list_print(expected);                                \
 		printf(" got: ");                                    \
 		list_print(actual);                                  \
+		printf(" with: ");                                   \
+		list_print(from);                                    \
 		putchar('\n');                                       \
 	} else                                                   \
 		print_ok();                                          \
+	list_destroy(from);                                      \
 	list_destroy(expected);                                  \
 	list_destroy(actual);                                    \
 } while (0);
 
-static void
-ft_list_remove_if_segfault(void)
+static
+void ft_list_remove_if_segfault(void)
 {
 	TEST_ASM_FUNCTION(tmp = list_from_format("");
 					  ft_list_remove_if(&tmp, &i0, compar, free_fct);
@@ -81,8 +86,8 @@ ft_list_remove_if_segfault(void)
 					  list_destroy(tmp));
 }
 
-static void
-ft_list_remove_if_compare(void)
+static
+void ft_list_remove_if_compare(void)
 {
 	FT_LIST_REMOVE_IF_EXPECT("", &i0);
 	FT_LIST_REMOVE_IF_EXPECT("1 2", &i3);
@@ -95,8 +100,7 @@ ft_list_remove_if_compare(void)
 	FT_LIST_REMOVE_IF_EXPECT("1 2 1 2 1 2 1 2", &i2);
 }
 
-void
-ft_list_remove_if_test(void)
+void ft_list_remove_if_test(void)
 {
 	test_name = "ft_list_remove_if.s";
 	ft_list_remove_if_segfault();

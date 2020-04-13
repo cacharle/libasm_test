@@ -6,14 +6,14 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:08:15 by cacharle          #+#    #+#             */
-/*   Updated: 2020/02/08 20:39:51 by cacharle         ###   ########.fr       */
+/*   Updated: 2020/04/13 15:00:02 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm_test.h"
 
-static int
-compar_int(void *a, void *b)
+static
+int compar_int(void *a, void *b)
 {
 	return *(int*)a - *(int*)b;
 }
@@ -21,8 +21,10 @@ compar_int(void *a, void *b)
 static t_list *tmp;
 static t_list *expected;
 static t_list *actual;
+static t_list *from;
 
 #define FT_LIST_SORT_EXPECT(fmt) do {                       \
+	from = list_from_format(fmt);                           \
 	expected = list_from_format(fmt);                       \
 	actual = list_from_format(fmt);                         \
 	ref_ft_list_sort(&expected, compar_int);                \
@@ -32,18 +34,18 @@ static t_list *actual;
 		list_print(expected);                               \
 		printf(" got: ");                                   \
 		list_print(actual);                                 \
+		printf(" with: ");                                  \
+		list_print(from);                                   \
 		putchar('\n');                                      \
 	} else                                                  \
 		print_ok();                                         \
+	list_destroy(from);                                     \
 	list_destroy(expected);                                 \
 	list_destroy(actual);                                   \
 } while (0);
 
-/* t_list* */
-/* st_merge_sorted_list(t_list* l1, t_list* l2, int (*cmp)(void *, void*)); */
-
-static void
-ft_list_sort_segfault(void)
+static
+void ft_list_sort_segfault(void)
 {
 	TEST_ASM_FUNCTION(tmp = list_from_format(""); ft_list_sort(&tmp, compar_int); list_destroy(tmp));
 	TEST_ASM_FUNCTION(tmp = list_from_format("1"); ft_list_sort(&tmp, compar_int); list_destroy(tmp));
@@ -54,8 +56,8 @@ ft_list_sort_segfault(void)
 	TEST_ASM_FUNCTION(tmp = list_from_format("12 45 1 -1 232 34 23 87879"); ft_list_sort(&tmp, compar_int); list_destroy(tmp));
 }
 
-static void
-ft_list_sort_compare(void)
+static
+void ft_list_sort_compare(void)
 {
 	FT_LIST_SORT_EXPECT("");
 	FT_LIST_SORT_EXPECT("1");
@@ -66,8 +68,7 @@ ft_list_sort_compare(void)
 	FT_LIST_SORT_EXPECT("12 45 1 -1 232 34 23 87879");
 }
 
-void
-ft_list_sort_test(void)
+void ft_list_sort_test(void)
 {
 	test_name = "ft_list_sort.s";
 	ft_list_sort_segfault();

@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:08:24 by cacharle          #+#    #+#             */
-/*   Updated: 2020/02/08 03:08:25 by cacharle         ###   ########.fr       */
+/*   Updated: 2020/04/13 14:57:14 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,31 @@
 static t_list *tmp;
 static t_list *expected;
 static t_list *actual;
+static t_list *from;
 
-#define FT_LIST_PUSH_FRONT_EXPECT(fmt, push) do {             \
-	expected = list_from_format(fmt);                         \
-	actual = list_from_format(fmt);                           \
+#define FT_LIST_PUSH_FRONT_EXPECT(fmt, push) do {              \
+	from = list_from_format(fmt);                              \
+	expected = list_from_format(fmt);                          \
+	actual = list_from_format(fmt);                            \
 	ref_ft_list_push_front(&expected, create_data_elem(push)); \
 	ft_list_push_front(&actual, create_data_elem(push));       \
-	if (list_cmp(expected, actual) != 0) {                    \
-		printf("KO: [COMPARE]: %s: expected: ", test_name);   \
-		list_print(expected);                                 \
-		printf(" got: ");                                     \
-		list_print(actual);                                   \
-		putchar('\n');                                        \
-	} else                                                    \
-		print_ok();                                           \
-	list_destroy(expected);                                   \
-	list_destroy(actual);                                     \
+	if (list_cmp(expected, actual) != 0) {                     \
+		printf("KO: [COMPARE]: %s: expected: ", test_name);    \
+		list_print(expected);                                  \
+		printf(" got: ");                                      \
+		list_print(actual);                                    \
+		printf(" with: ");                                     \
+		list_print(from);                                      \
+		putchar('\n');                                         \
+	} else                                                     \
+		print_ok();                                            \
+	list_destroy(from);                                        \
+	list_destroy(expected);                                    \
+	list_destroy(actual);                                      \
 } while (0);
 
-static void
-ft_list_push_front_segfault(void)
+static
+void ft_list_push_front_segfault(void)
 {
 	TEST_ASM_FUNCTION(tmp = NULL; ft_list_push_front(&tmp, malloc(1));list_destroy(tmp));
 	TEST_ASM_FUNCTION(tmp = list_from_format("1 2 3"); ft_list_push_front(&tmp, create_data_elem(34)); list_destroy(tmp));
@@ -51,8 +56,8 @@ ft_list_push_front_segfault(void)
 	);
 }
 
-static void
-ft_list_push_front_compare(void)
+static
+void ft_list_push_front_compare(void)
 {
 	FT_LIST_PUSH_FRONT_EXPECT("", 0);
 	FT_LIST_PUSH_FRONT_EXPECT("", 1);
@@ -62,8 +67,7 @@ ft_list_push_front_compare(void)
 	FT_LIST_PUSH_FRONT_EXPECT("1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20", 7);
 }
 
-void
-ft_list_push_front_test(void)
+void ft_list_push_front_test(void)
 {
 	test_name = "ft_list_push_front.s";
 	ft_list_push_front_segfault();

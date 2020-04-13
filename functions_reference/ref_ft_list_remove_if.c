@@ -6,15 +6,14 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:20:03 by cacharle          #+#    #+#             */
-/*   Updated: 2020/02/08 20:02:25 by cacharle         ###   ########.fr       */
+/*   Updated: 2020/04/13 15:01:02 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm_test.h"
 
-void
-ref_ft_list_remove_if(t_list **begin_list, void *data_ref,
-						int (*cmp)(), void (*free_fct)(void *))
+void ref_ft_list_remove_if(t_list **begin_list, void *data_ref,
+							int (*cmp)(), void (*free_fct)(void *))
 {
 	t_list *saved_next;
 

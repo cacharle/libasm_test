@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:08:06 by cacharle          #+#    #+#             */
-/*   Updated: 2020/02/08 03:08:07 by cacharle         ###   ########.fr       */
+/*   Updated: 2020/04/13 14:45:00 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static char *tmp;
 	free(tmp);                                \
 } while (0);
 
-static void
-ft_strdup_test_segfault(void)
+static
+void ft_strdup_test_segfault(void)
 {
 	char *tmp2 = NULL;
 	char a;
@@ -51,8 +51,8 @@ tortor, sit amet consequat amet."));
 	TEST_ASM_FUNCTION(a = *tmp2);
 }
 
-static void
-ft_strdup_test_compare(void)
+static
+void ft_strdup_test_compare(void)
 {
 	FT_STRDUP_EXPECT("");
 	FT_STRDUP_EXPECT("abc");
@@ -69,9 +69,7 @@ tortor, sit amet consequat amet.");
 	FT_STRDUP_EXPECT("\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0b\x0c\x0d\x0e\x0f");
 }
 
-
-void
-ft_strdup_test(void)
+void ft_strdup_test(void)
 {
 	test_name = "ft_strdup.s";
 

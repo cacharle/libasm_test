@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:07:27 by cacharle          #+#    #+#             */
-/*   Updated: 2020/02/08 03:07:38 by cacharle         ###   ########.fr       */
+/*   Updated: 2020/04/13 14:52:28 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static int expected_ret;
 static int actual_ret;
 
-	/* asm("movq $0xffffffffffffffff, %rax"); \ */
 #define FT_ATOI_BASE_EXPECT(str, base) do {      \
 	actual_ret = ft_atoi_base(str, base);        \
 	expected_ret = ref_ft_atoi_base(str, base);  \
@@ -26,8 +25,8 @@ static int actual_ret;
 		print_ok();                              \
 } while (0);
 
-static void
-ft_atoi_base_segfault(void)
+static
+void ft_atoi_base_segfault(void)
 {
 	TEST_ASM_FUNCTION(ft_atoi_base("", ""));
 	TEST_ASM_FUNCTION(ft_atoi_base("10", ""));
@@ -83,8 +82,8 @@ ft_atoi_base_segfault(void)
 	TEST_ASM_FUNCTION(ft_atoi_base(TO_STRING(INT_MIN), "0123456789"));
 }
 
-static void
-ft_atoi_base_compare(void)
+static
+void ft_atoi_base_compare(void)
 {
 	FT_ATOI_BASE_EXPECT("", "");
 	FT_ATOI_BASE_EXPECT("10", "");
@@ -140,8 +139,7 @@ ft_atoi_base_compare(void)
 	FT_ATOI_BASE_EXPECT(TO_STRING(INT_MIN), "0123456789");
 }
 
-void
-ft_atoi_base_test(void)
+void ft_atoi_base_test(void)
 {
 	test_name = "ft_atoi_base.s";
 

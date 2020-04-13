@@ -6,14 +6,13 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:20:23 by cacharle          #+#    #+#             */
-/*   Updated: 2020/02/08 03:20:24 by cacharle         ###   ########.fr       */
+/*   Updated: 2020/04/13 15:01:09 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm_test.h"
 
-void
-ref_ft_list_push_front(t_list **begin_list, void *data)
+void ref_ft_list_push_front(t_list **begin_list, void *data)
 {
 	if (begin_list == NULL)
 		return ;

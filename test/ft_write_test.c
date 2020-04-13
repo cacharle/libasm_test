@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:07:48 by cacharle          #+#    #+#             */
-/*   Updated: 2020/02/23 06:24:55 by cacharle         ###   ########.fr       */
+/*   Updated: 2020/04/13 14:51:39 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #define FT_WRITE_BUF_SIZE (1 << 12)
 
 static int ft_write_pipe[2];
-static char buf[FT_WRITE_BUF_SIZE];
+static char buf[FT_WRITE_BUF_SIZE] = {0};
 static unsigned long write_ret;
 static int ret;
 
@@ -27,8 +27,8 @@ static int ret;
 	ret = read(ft_write_pipe[0], buf, FT_WRITE_BUF_SIZE);                   \
 	buf[ret] = '\0';                                                        \
 	if (strcmp(buf, str) != 0 || write_ret != strlen(str))                  \
-		printf("KO: [COMPARE]: %s: expected: %lu \"%s\" got: %lu \"%s\"\n", \
-				test_name, strlen(str), str, write_ret, buf);               \
+		printf("KO: [COMPARE]: %s: expected: %lu \"%s\" got: %lu \"%s\" with: %d, \"%s\", %zu \n", \
+				test_name, strlen(str), str, write_ret, buf, ft_write_pipe[0], buf, strlen(str));  \
 	else                                                                    \
 		print_ok();                                                         \
 	close(ft_write_pipe[1]);                                                \
@@ -38,14 +38,14 @@ static int ret;
 #define FT_WRITE_EXPECT_ERROR(fd, str, size) do {             \
 	write_ret = ft_write(fd, str, size);                      \
 	if ((long)write_ret != -1)                                \
-		printf("KO: [COMPARE]: %s: expected: %ld got: %ld\n", \
-				test_name, -1l, (long)write_ret);             \
+		printf("KO: [COMPARE]: %s: expected: %ld got: %ld with: %d "#str", %d\n", \
+				test_name, -1l, (long)write_ret, fd, size);                       \
 	else                                                      \
 		print_ok();                                           \
 } while (0);
 
-void
-ft_write_test_segfault(void)
+static
+void ft_write_test_segfault(void)
 {
 	int tmp[2];
 	if (pipe(tmp) < 0)
@@ -65,8 +65,8 @@ ft_write_test_segfault(void)
 	TEST_ASM_FUNCTION(ft_write(OPEN_MAX + 1, "tt", 2));
 }
 
-void
-ft_write_test_compare(void)
+static
+void ft_write_test_compare(void)
 {
 	FT_WRITE_EXPECT("");
 	FT_WRITE_EXPECT("bon");
@@ -80,7 +80,7 @@ volutpat, eros eget rhoncus rhoncus, diam augue egestas dolor, vitae rutrum nisi
 felis sed purus. Mauris magna ex, mollis non suscipit eu, lacinia ac turpis. Phasellus\
 ac tortor et lectus fermentum lobortis eu at mauris. Vestibulum sit amet posuere\
 tortor, sit amet consequat amet.");
-	
+
 	FT_WRITE_EXPECT_ERROR(STDOUT_FILENO, NULL, 3);
 	FT_WRITE_EXPECT_ERROR(-1, "bonjour", 7);
 	FT_WRITE_EXPECT_ERROR(42, "bonjour", 7);
@@ -89,8 +89,7 @@ tortor, sit amet consequat amet.");
 	FT_WRITE_EXPECT_ERROR(42, NULL, 7);
 }
 
-void
-ft_write_test(void)
+void ft_write_test(void)
 {
 	test_name = "ft_write.s";
 

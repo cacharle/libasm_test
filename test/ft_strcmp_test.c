@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:08:03 by cacharle          #+#    #+#             */
-/*   Updated: 2020/04/12 20:08:08 by charles          ###   ########.fr       */
+/*   Updated: 2020/04/13 14:44:18 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int strcmp_actual;
 			   strcmp_expected, strcmp_actual); \
 } while (0);
 
-static void
-ft_strcmp_test_segfault(void)
+static
+void ft_strcmp_test_segfault(void)
 {
 	TEST_ASM_FUNCTION(ft_strcmp("", ""));
 	TEST_ASM_FUNCTION(ft_strcmp("bon", "bon"));
@@ -51,8 +51,8 @@ ac tortor et lectus fermentum lobortis eu at mauris. Vestibulum sit amet posuere
 tortor, sit amet consequat amet."));
 }
 
-static void
-ft_strcmp_test_compare(void)
+static
+void ft_strcmp_test_compare(void)
 {
 	FT_STRCMP_EXPECT("", "");
 	FT_STRCMP_EXPECT("bon", "");
@@ -115,8 +115,7 @@ tortor, sit amet consequat amet.");
 	FT_STRCMP_EXPECT("\xfe", "\xfe\xff");
 }
 
-void
-ft_strcmp_test(void)
+void ft_strcmp_test(void)
 {
 	test_name = "ft_strcmp.s";
 

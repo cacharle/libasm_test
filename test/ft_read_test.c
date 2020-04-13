@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:07:44 by cacharle          #+#    #+#             */
-/*   Updated: 2020/02/23 06:28:39 by cacharle         ###   ########.fr       */
+/*   Updated: 2020/04/13 14:52:41 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #define FT_READ_BUF_SIZE (1 << 12)
 
 static int ft_read_pipe[2];
-static char buf[FT_READ_BUF_SIZE];
+static char buf[FT_READ_BUF_SIZE] = {0};
 static int ret;
 
 #define FT_READ_EXPECT(str) do {                                           \
@@ -26,8 +26,8 @@ static int ret;
 	ret = ft_read(ft_read_pipe[0], buf, strlen(str));                      \
 	buf[ret] = '\0';                                                       \
 	if (strcmp(buf, str) != 0 || ret != strlen(str))                       \
-		printf("KO: [COMPARE]: %s: expected: %lu \"%s\" got: %d \"%s\"\n", \
-				test_name, strlen(str), str, ret, buf);                    \
+		printf("KO: [COMPARE]: %s: expected: %lu \"%s\" got: %d \"%s\" with: %d, \"%s\", %zu \n", \
+				test_name, strlen(str), str, ret, buf, ft_read_pipe[0], buf, strlen(str));        \
 	else                                                                   \
 		print_ok();                                                        \
 	close(ft_read_pipe[1]);                                                \
@@ -37,14 +37,14 @@ static int ret;
 #define FT_READ_EXPECT_ERROR(fd, str, size) do {              \
 	ret = ft_read(fd, str, size);                             \
 	if ((long)ret != -1)                                      \
-		printf("KO: [COMPARE]: %s: expected: %ld got: %ld\n", \
-				test_name, -1l, (long)ret);                   \
+		printf("KO: [COMPARE]: %s: expected: %ld got: %ld with: %d "#str" %d\n", \
+				test_name, -1l, (long)ret, fd, size);                            \
 	else                                                      \
 		print_ok();                                           \
 } while (0);
 
-void
-ft_read_test_segfault(void)
+static
+void ft_read_test_segfault(void)
 {
 	int tmp[2];
 	if (pipe(tmp) < 0)
@@ -64,8 +64,8 @@ ft_read_test_segfault(void)
 	TEST_ASM_FUNCTION(ft_read(OPEN_MAX + 1, "tt", 2));
 }
 
-void
-ft_read_test_compare(void)
+static
+void ft_read_test_compare(void)
 {
 	FT_READ_EXPECT("");
 	FT_READ_EXPECT("bon");
@@ -88,8 +88,7 @@ tortor, sit amet consequat amet.");
 	FT_READ_EXPECT_ERROR(42, NULL, 7);
 }
 
-void
-ft_read_test(void)
+void ft_read_test(void)
 {
 	test_name = "ft_read.s";
 

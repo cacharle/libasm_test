@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:07:19 by cacharle          #+#    #+#             */
-/*   Updated: 2020/04/12 20:06:05 by charles          ###   ########.fr       */
+/*   Updated: 2020/04/13 14:41:40 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,17 @@
 /*
  * mandatory
  */
-int
-ft_strlen(char *str);
-char*
-ft_strcpy(char *dst, const char *src);
-int
-ft_strcmp(const char *s1, const char *s2);
-int
-ft_write(int fildes, const void *buf, size_t buf_size);
-int
-ft_read(int fildes, void *buf, size_t buf_size);
-char*
-ft_strdup(const char *str);
+int ft_strlen(char *str);
+char* ft_strcpy(char *dst, const char *src);
+int ft_strcmp(const char *s1, const char *s2);
+int ft_write(int fildes, const void *buf, size_t buf_size);
+int ft_read(int fildes, void *buf, size_t buf_size);
+char* ft_strdup(const char *str);
 
 /*
  * bonus
  */
-int
-ft_atoi_base(const char *str, const char *base);
+int ft_atoi_base(const char *str, const char *base);
 
 typedef struct		s_list
 {
@@ -57,80 +50,51 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-void
-ft_list_push_front(t_list **begin_list, void *data);
-int
-ft_list_size(t_list *begin_list);
-void
-ft_list_sort(t_list **begin_list, int (*cmp)());
-void
-ft_list_remove_if(t_list **begin_list, void *data_ref,
+void ft_list_push_front(t_list **begin_list, void *data);
+int ft_list_size(t_list *begin_list);
+void ft_list_sort(t_list **begin_list, int (*cmp)());
+void ft_list_remove_if(t_list **begin_list, void *data_ref,
 					int (*cmp)(), void (*free_fct)(void *));
 
 /*
  * test_functions
  */
-void
-ft_strlen_test(void);
-void
-ft_strcpy_test(void);
-void
-ft_strcmp_test(void);
-void
-ft_write_test(void);
-void
-ft_read_test(void);
-void
-ft_strdup_test(void);
+void ft_strlen_test(void);
+void ft_strcpy_test(void);
+void ft_strcmp_test(void);
+void ft_write_test(void);
+void ft_read_test(void);
+void ft_strdup_test(void);
 
-void
-ft_atoi_base_test(void);
-void
-ft_list_push_front_test(void);
-void
-ft_list_size_test(void);
-void
-ft_list_sort_test(void);
-void
-ft_list_remove_if_test(void);
+void ft_atoi_base_test(void);
+void ft_list_push_front_test(void);
+void ft_list_size_test(void);
+void ft_list_sort_test(void);
+void ft_list_remove_if_test(void);
 
 
 /*
  * helpers
  */
-void
-print_ok(void);
-void
-print_signaled_ko(void);
+void print_ok(void);
+void print_signaled_ko(void);
 
-int*
-create_data_elem(int data);
-t_list*
-create_elem(int data);
-t_list*
-list_from_format(char *fmt);
-t_list*
-list_dup(t_list *list);
-int
-list_cmp(t_list *l1, t_list *l2);
-void
-list_print(t_list *list);
-void
-list_destroy(t_list *list);
+int* create_data_elem(int data);
+t_list* create_elem(int data);
+t_list* list_from_format(char *fmt);
+t_list* list_dup(t_list *list);
+int list_cmp(t_list *l1, t_list *l2);
+void list_print(t_list *list);
+void list_destroy(t_list *list);
 
 /*
  * function of reference
  */
-int
-ref_ft_atoi_base(char *str, char *base);
-void
-ref_ft_list_push_front(t_list **begin_list, void *data);
-int
-ref_ft_list_size(t_list *begin_list);
-void
-ref_ft_list_sort(t_list **begin_list, int (*cmp)());
-void
-ref_ft_list_remove_if(t_list **begin_list, void *data_ref,
+int ref_ft_atoi_base(char *str, char *base);
+void ref_ft_list_push_front(t_list **begin_list, void *data);
+int ref_ft_list_size(t_list *begin_list);
+void ref_ft_list_sort(t_list **begin_list, int (*cmp)());
+void ref_ft_list_remove_if(t_list **begin_list, void *data_ref,
 						int (*cmp)(), void (*free_fct)(void *));
 
 /*
@@ -161,4 +125,4 @@ char *test_name;
 		print_ok();                \
 } while(0);
 
-#endif /* LIBASM_TEST_H */
+#endif

@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:07:53 by cacharle          #+#    #+#             */
-/*   Updated: 2020/04/12 20:08:55 by charles          ###   ########.fr       */
+/*   Updated: 2020/04/13 14:41:19 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int expected;
 		print_ok();                           \
 } while (0);
 
-static void
-ft_strlen_test_segfault(void)
+static
+void ft_strlen_test_segfault(void)
 {
 	TEST_ASM_FUNCTION(ft_strlen(""));
 	TEST_ASM_FUNCTION(ft_strlen("bon"));
@@ -42,8 +42,8 @@ ac tortor et lectus fermentum lobortis eu at mauris. Vestibulum sit amet posuere
 tortor, sit amet consequat amet."));
 }
 
-static void
-ft_strlen_test_compare(void)
+static
+void ft_strlen_test_compare(void)
 {
 	FT_STRLEN_EXPECT("");
 	FT_STRLEN_EXPECT("bon");
@@ -59,8 +59,7 @@ ac tortor et lectus fermentum lobortis eu at mauris. Vestibulum sit amet posuere
 tortor, sit amet consequat amet.");
 }
 
-void
-ft_strlen_test(void)
+void ft_strlen_test(void)
 {
 	test_name = "ft_strlen.s";
 	ft_strlen_test_segfault();

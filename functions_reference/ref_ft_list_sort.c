@@ -6,14 +6,14 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 02:49:28 by cacharle          #+#    #+#             */
-/*   Updated: 2020/02/08 02:49:29 by cacharle         ###   ########.fr       */
+/*   Updated: 2020/04/13 15:00:52 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm_test.h"
 
-static t_list*
-merge_sorted_list(t_list* l1, t_list* l2, int (*cmp)(void *, void*))
+static
+t_list* merge_sorted_list(t_list* l1, t_list* l2, int (*cmp)(void *, void*))
 {
 	t_list *merged = 0x0;
 
@@ -34,8 +34,7 @@ merge_sorted_list(t_list* l1, t_list* l2, int (*cmp)(void *, void*))
 	return merged;
 }
 
-void
-ref_ft_list_sort(t_list **begin_list, int (*cmp)(void *, void*))
+void ref_ft_list_sort(t_list **begin_list, int (*cmp)(void *, void*))
 {
 	if (begin_list == 0x0 || *begin_list == 0x0
 			|| (*begin_list)->next == 0x0)

@@ -6,14 +6,13 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:06:45 by cacharle          #+#    #+#             */
-/*   Updated: 2020/02/08 20:58:13 by cacharle         ###   ########.fr       */
+/*   Updated: 2020/04/13 15:01:24 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm_test.h"
 
-int
-main(void)
+int main(void)
 {
 	ft_strlen_test();
 	ft_strcpy_test();
