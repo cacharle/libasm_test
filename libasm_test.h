@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:07:19 by cacharle          #+#    #+#             */
-/*   Updated: 2020/04/13 14:41:40 by charles          ###   ########.fr       */
+/*   Updated: 2020/05/04 16:05:51 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <sys/wait.h>
 # include <limits.h>
 # include <stddef.h>
+# include <errno.h>
 
 # define TO_STRING(x) #x
 
@@ -113,7 +114,7 @@ bool signaled;
 		wait(&pid);                   \
 		signaled = !WIFEXITED(pid);   \
 	}                                 \
-} while(0);
+} while(0)
 
 char *test_name;
 
@@ -123,6 +124,12 @@ char *test_name;
 		print_signaled_ko();       \
 	else                           \
 		print_ok();                \
-} while(0);
+} while(0)
+
+# define ERRNO_WRAP(x, errno_save) do { \
+	errno = 0;                          \
+	do { x; } while (0);                \
+	errno_save = errno;                 \
+} while(0)
 
 #endif

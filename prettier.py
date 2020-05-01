@@ -6,7 +6,7 @@
 #    By: cacharle <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/05 23:04:13 by cacharle          #+#    #+#              #
-#    Updated: 2020/02/05 23:07:13 by cacharle         ###   ########.fr        #
+#    Updated: 2020/05/04 14:44:44 by charles          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,11 +17,11 @@ import argparse
 
 
 def green(*strings):
-    return "".join([f"\033[32m{s}\033[0m" for s in strings])
+    return "".join(["\033[32m{}\033[0m".format(s) for s in strings])
 
 
 def red(*strings):
-    return "".join([f"\033[31m{s}\033[0m" for s in strings])
+    return "".join(["\033[31m{}\033[0m".format(s) for s in strings])
 
 def create_logs_entry(logs, key):
     logs[key] = {}
@@ -89,9 +89,10 @@ if __name__ == "__main__":
     for k, v in logs.items():
         for e in v["ko_info"]:
             if e['type'] == "SEGFAULT":
-                print(f"{k} : {red('SEGFAULT')}")
+                print("{} : {}".format(k, red('SEGFAULT')))
             elif e['type'] == "COMPARE":
-                p = f"{k}"
+                p = str(k)
                 if e["with"] is not None:
-                    p += f"with {e['with']}"
-                print(p, f":\n    {green('expected: ') + e['expected']}\n    {red('actual: ') + e['actual']}")
+                    p += "with {}".format(e['with'])
+                print(p, ":\n    {}\n    {}".format(green('expected: ') + e['expected'],
+                                                     red('actual: ') + e['actual']))

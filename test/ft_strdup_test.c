@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:08:06 by cacharle          #+#    #+#             */
-/*   Updated: 2020/04/13 14:45:00 by charles          ###   ########.fr       */
+/*   Updated: 2020/05/04 15:21:49 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static
 void ft_strdup_test_segfault(void)
 {
 	char *tmp2 = NULL;
-	char a;
 
 	TEST_ASM_FUNCTION(ft_strdup(""));
 	TEST_ASM_FUNCTION(ft_strdup("abc"));
@@ -42,13 +41,13 @@ ac tortor et lectus fermentum lobortis eu at mauris. Vestibulum sit amet posuere
 tortor, sit amet consequat amet."));
 
 	tmp2 = ft_strdup("");
-	TEST_ASM_FUNCTION(a = *tmp2);
+	TEST_ASM_FUNCTION(char a = *tmp2; a++;);
 	tmp2 = ft_strdup("abc");
-	TEST_ASM_FUNCTION(a = *tmp2);
+	TEST_ASM_FUNCTION(char a = *tmp2; a++;);
 	tmp2 = ft_strdup("asl;fjl;asd");
-	TEST_ASM_FUNCTION(a = *tmp2);
+	TEST_ASM_FUNCTION(char a = *tmp2; a++;);
 	tmp2 = ft_strdup("yope\0la");
-	TEST_ASM_FUNCTION(a = *tmp2);
+	TEST_ASM_FUNCTION(char a = *tmp2; a++;);
 }
 
 static
