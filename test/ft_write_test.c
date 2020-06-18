@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:07:48 by cacharle          #+#    #+#             */
-/*   Updated: 2020/05/04 16:06:28 by charles          ###   ########.fr       */
+/*   Updated: 2020/06/18 14:58:45 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,22 +59,22 @@ static ssize_t ret;
 static
 void ft_write_test_segfault(void)
 {
-	int tmp[2];
-	if (pipe(tmp) < 0)
-		exit(EXIT_FAILURE);
-	TEST_ASM_FUNCTION(ft_write(-1, "test", 5));
-	TEST_ASM_FUNCTION(ft_write(tmp[1], NULL, 5));
-	TEST_ASM_FUNCTION(ft_write(tmp[1], "test", 0));
-	TEST_ASM_FUNCTION(ft_write(tmp[1], "test", 5));
-	TEST_ASM_FUNCTION(ft_write(tmp[1], "t", 1));
-	TEST_ASM_FUNCTION(ft_write(tmp[1], "", 0));
-	TEST_ASM_FUNCTION(ft_write(tmp[1], "test", 4));
-	TEST_ASM_FUNCTION(ft_write(tmp[1], "test", 2));
-	TEST_ASM_FUNCTION(ft_write(tmp[1], NULL, 2));
-	close(tmp[0]);
-	close(tmp[1]);
-	TEST_ASM_FUNCTION(ft_write(-1, "tt", 2));
-	TEST_ASM_FUNCTION(ft_write(OPEN_MAX + 1, "tt", 2));
+	/* int tmp[2]; */
+	/* if (pipe(tmp) < 0) */
+	/* 	exit(EXIT_FAILURE); */
+	/* TEST_ASM_FUNCTION(ft_write(-1, "test", 5)); */
+	/* TEST_ASM_FUNCTION(ft_write(tmp[1], NULL, 5)); */
+	/* TEST_ASM_FUNCTION(ft_write(tmp[1], "test", 0)); */
+	/* TEST_ASM_FUNCTION(ft_write(tmp[1], "test", 5)); */
+	/* TEST_ASM_FUNCTION(ft_write(tmp[1], "t", 1)); */
+	/* TEST_ASM_FUNCTION(ft_write(tmp[1], "", 0)); */
+	/* TEST_ASM_FUNCTION(ft_write(tmp[1], "test", 4)); */
+	/* TEST_ASM_FUNCTION(ft_write(tmp[1], "test", 2)); */
+	/* TEST_ASM_FUNCTION(ft_write(tmp[1], NULL, 2)); */
+	/* close(tmp[0]); */
+	/* close(tmp[1]); */
+	/* TEST_ASM_FUNCTION(ft_write(-1, "tt", 2)); */
+	/* TEST_ASM_FUNCTION(ft_write(OPEN_MAX + 1, "tt", 2)); */
 }
 
 static

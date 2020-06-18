@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:07:44 by cacharle          #+#    #+#             */
-/*   Updated: 2020/05/04 16:09:34 by charles          ###   ########.fr       */
+/*   Updated: 2020/06/18 14:58:54 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,21 @@ static int read_origin_errno;
 static
 void ft_read_test_segfault(void)
 {
-	int tmp[2];
-	char buf_read[2048];
-
-	if (pipe(tmp) < 0)
-		exit(EXIT_FAILURE);
-	write(tmp[1], "asdfkasdfkl;jasd;ljkfa;lssdlfasdfasdfasdfasdfasdfasdfasdfasdfasdf", 40);
-	TEST_ASM_FUNCTION(ft_read(-1, buf_read, 2));
-	TEST_ASM_FUNCTION(ft_read(tmp[0], NULL, 2));
-	TEST_ASM_FUNCTION(ft_read(tmp[0], buf_read, 0));
-	TEST_ASM_FUNCTION(ft_read(tmp[0], buf_read, 5));
-	TEST_ASM_FUNCTION(ft_read(tmp[0], buf_read, 32));
-	close(tmp[0]);
-	close(tmp[1]);
-	TEST_ASM_FUNCTION(ft_read(-1, buf_read, 2));
-	TEST_ASM_FUNCTION(ft_read(OPEN_MAX + 1, buf_read, 2));
+	/* int tmp[2]; */
+	/* char buf_read[2048]; */
+    /*  */
+	/* if (pipe(tmp) < 0) */
+	/* 	exit(EXIT_FAILURE); */
+	/* write(tmp[1], "asdfkasdfkl;jasd;ljkfa;lssdlfasdfasdfasdfasdfasdfasdfasdfasdfasdf", 40); */
+	/* TEST_ASM_FUNCTION(ft_read(-1, buf_read, 2)); */
+	/* TEST_ASM_FUNCTION(ft_read(tmp[0], NULL, 2)); */
+	/* TEST_ASM_FUNCTION(ft_read(tmp[0], buf_read, 0)); */
+	/* TEST_ASM_FUNCTION(ft_read(tmp[0], buf_read, 5)); */
+	/* TEST_ASM_FUNCTION(ft_read(tmp[0], buf_read, 32)); */
+	/* close(tmp[0]); */
+	/* close(tmp[1]); */
+	/* TEST_ASM_FUNCTION(ft_read(-1, buf_read, 2)); */
+	/* TEST_ASM_FUNCTION(ft_read(OPEN_MAX + 1, buf_read, 2)); */
 }
 
 static

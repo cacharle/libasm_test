@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:07:19 by cacharle          #+#    #+#             */
-/*   Updated: 2020/05/04 16:05:51 by charles          ###   ########.fr       */
+/*   Updated: 2020/05/04 21:27:44 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,32 +104,32 @@ void ref_ft_list_remove_if(t_list **begin_list, void *data_ref,
 int pid;
 bool signaled;
 
-# define TEST_SEGFAULT(x) do {        \
-	if ((pid = fork()) < 0)           \
-		exit(EXIT_FAILURE);           \
-	if (pid == 0) {                   \
-		do { x; } while(0);           \
-		exit(EXIT_SUCCESS);           \
-	} else {                          \
-		wait(&pid);                   \
-		signaled = !WIFEXITED(pid);   \
-	}                                 \
+# define TEST_SEGFAULT(x) do {           \
+	if ((pid = fork()) < 0)              \
+		exit(EXIT_FAILURE);              \
+	if (pid == 0) {                      \
+		do { x; } while(0);              \
+		exit(EXIT_SUCCESS);              \
+	} else {                             \
+		wait(&pid);                      \
+		signaled = !WIFEXITED(pid);      \
+	}                                    \
 } while(0)
 
 char *test_name;
 
-# define TEST_ASM_FUNCTION(x) do { \
-	TEST_SEGFAULT(x);              \
-	if (signaled)                  \
-		print_signaled_ko();       \
-	else                           \
-		print_ok();                \
+# define TEST_ASM_FUNCTION(x) do {       \
+	TEST_SEGFAULT(x);                    \
+	if (signaled)                        \
+		print_signaled_ko();             \
+	else                                 \
+		print_ok();                      \
 } while(0)
 
-# define ERRNO_WRAP(x, errno_save) do { \
-	errno = 0;                          \
-	do { x; } while (0);                \
-	errno_save = errno;                 \
+# define ERRNO_WRAP(x, errno_save) do {  \
+	errno = 0;                           \
+	do { x; } while (0);                 \
+	errno_save = errno;                  \
 } while(0)
 
 #endif
