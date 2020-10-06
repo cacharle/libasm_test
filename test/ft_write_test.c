@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:07:48 by cacharle          #+#    #+#             */
-/*   Updated: 2020/06/18 14:58:45 by charles          ###   ########.fr       */
+/*   Updated: 2020/10/06 14:40:00 by cacharle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,59 +22,59 @@ static int write_errno;
 static int write_origin_errno;
 static ssize_t ret;
 
-#define FT_WRITE_EXPECT(str) do {                                           \
-	if (pipe(ft_write_pipe) < 0)                                            \
-		exit(EXIT_FAILURE);                                                 \
-	fcntl(ft_write_pipe[0], F_SETFL, O_NONBLOCK);                           \
-	ERRNO_WRAP(write_origin_ret = write(ft_write_pipe[1], str, strlen(str)), write_origin_errno); \
-	read(ft_write_pipe[0], buf, FT_WRITE_BUF_SIZE);                                               \
-	ERRNO_WRAP(write_ret = ft_write(ft_write_pipe[1], str, strlen(str)), write_errno);            \
-	ret = read(ft_write_pipe[0], buf, FT_WRITE_BUF_SIZE);                   \
-	buf[ret] = '\0';                                                        \
-	if (write_errno != write_origin_errno)                                  \
-		printf("KO: [COMPARE]: %s: expected: errno %d got: errno %d with: "#str"\n", \
-				test_name, write_origin_errno, write_errno);                         \
-	else if (strcmp(buf, str) != 0 || write_ret != write_origin_ret)        \
+#define FT_WRITE_EXPECT(str) do {                                                                  \
+	if (pipe(ft_write_pipe) < 0)                                                                   \
+		exit(EXIT_FAILURE);                                                                        \
+	fcntl(ft_write_pipe[0], F_SETFL, O_NONBLOCK);                                                  \
+	ERRNO_WRAP(write_origin_ret = write(ft_write_pipe[1], str, strlen(str)), write_origin_errno);  \
+	read(ft_write_pipe[0], buf, FT_WRITE_BUF_SIZE);                                                \
+	ERRNO_WRAP(write_ret = ft_write(ft_write_pipe[1], str, strlen(str)), write_errno);             \
+	ret = read(ft_write_pipe[0], buf, FT_WRITE_BUF_SIZE);                                          \
+	buf[ret] = '\0';                                                                               \
+	if (write_errno != write_origin_errno)                                                         \
+		printf("KO: [COMPARE]: %s: expected: errno %d got: errno %d with: "#str"\n",               \
+				test_name, write_origin_errno, write_errno);                                       \
+	else if (strcmp(buf, str) != 0 || write_ret != write_origin_ret)                               \
 		printf("KO: [COMPARE]: %s: expected: %lu \"%s\" got: %lu \"%s\" with: %d, \"%s\", %zu \n", \
 				test_name, strlen(str), str, write_ret, buf, ft_write_pipe[0], buf, strlen(str));  \
-	else                                                                    \
-		print_ok();                                                         \
-	close(ft_write_pipe[1]);                                                \
-	close(ft_write_pipe[0]);                                                \
+	else                                                                                           \
+		print_ok();                                                                                \
+	close(ft_write_pipe[1]);                                                                       \
+	close(ft_write_pipe[0]);                                                                       \
 } while (0);
 
-#define FT_WRITE_EXPECT_ERROR(fd, str, size) do {                                 \
-	ERRNO_WRAP(write_ret = ft_write(fd, str, size), write_errno);                 \
-	ERRNO_WRAP(write_origin_ret = write(fd, str, size), write_origin_errno);      \
-	if ((long)write_ret != -1)                                                    \
-		printf("KO: [COMPARE]: %s: expected: %ld got: %ld with: %d "#str", %d\n", \
-				test_name, -1l, (long)write_ret, fd, size);                       \
-	else if (write_errno != write_origin_errno)                                   \
+#define FT_WRITE_EXPECT_ERROR(fd, str, size) do {                                           \
+	ERRNO_WRAP(write_ret = ft_write(fd, str, size), write_errno);                           \
+	ERRNO_WRAP(write_origin_ret = write(fd, str, size), write_origin_errno);                \
+	if ((long)write_ret != -1)                                                              \
+		printf("KO: [COMPARE]: %s: expected: %ld got: %ld with: %d "#str", %d\n",           \
+				test_name, -1l, (long)write_ret, fd, size);                                 \
+	else if (write_errno != write_origin_errno)                                             \
 		printf("KO: [COMPARE]: %s: expected: errno %d got: errno %d with: %d "#str", %d\n", \
 				test_name, write_origin_errno, write_errno, fd, size);                      \
-	else                                                                          \
-		print_ok();                                                               \
+	else                                                                                    \
+		print_ok();                                                                         \
 } while (0);
 
 static
 void ft_write_test_segfault(void)
 {
-	/* int tmp[2]; */
-	/* if (pipe(tmp) < 0) */
-	/* 	exit(EXIT_FAILURE); */
-	/* TEST_ASM_FUNCTION(ft_write(-1, "test", 5)); */
-	/* TEST_ASM_FUNCTION(ft_write(tmp[1], NULL, 5)); */
-	/* TEST_ASM_FUNCTION(ft_write(tmp[1], "test", 0)); */
-	/* TEST_ASM_FUNCTION(ft_write(tmp[1], "test", 5)); */
-	/* TEST_ASM_FUNCTION(ft_write(tmp[1], "t", 1)); */
-	/* TEST_ASM_FUNCTION(ft_write(tmp[1], "", 0)); */
-	/* TEST_ASM_FUNCTION(ft_write(tmp[1], "test", 4)); */
-	/* TEST_ASM_FUNCTION(ft_write(tmp[1], "test", 2)); */
-	/* TEST_ASM_FUNCTION(ft_write(tmp[1], NULL, 2)); */
-	/* close(tmp[0]); */
-	/* close(tmp[1]); */
-	/* TEST_ASM_FUNCTION(ft_write(-1, "tt", 2)); */
-	/* TEST_ASM_FUNCTION(ft_write(OPEN_MAX + 1, "tt", 2)); */
+	int tmp[2];
+	if (pipe(tmp) < 0)
+		exit(EXIT_FAILURE);
+	TEST_ASM_FUNCTION(ft_write(-1, "test", 5));
+	TEST_ASM_FUNCTION(ft_write(tmp[1], NULL, 5));
+	TEST_ASM_FUNCTION(ft_write(tmp[1], "test", 0));
+	TEST_ASM_FUNCTION(ft_write(tmp[1], "test", 5));
+	TEST_ASM_FUNCTION(ft_write(tmp[1], "t", 1));
+	TEST_ASM_FUNCTION(ft_write(tmp[1], "", 0));
+	TEST_ASM_FUNCTION(ft_write(tmp[1], "test", 4));
+	TEST_ASM_FUNCTION(ft_write(tmp[1], "test", 2));
+	TEST_ASM_FUNCTION(ft_write(tmp[1], NULL, 2));
+	close(tmp[0]);
+	close(tmp[1]);
+	TEST_ASM_FUNCTION(ft_write(-1, "tt", 2));
+	TEST_ASM_FUNCTION(ft_write(OPEN_MAX + 1, "tt", 2));
 }
 
 static
