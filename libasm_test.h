@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:07:19 by cacharle          #+#    #+#             */
-/*   Updated: 2020/10/06 15:11:17 by cacharle         ###   ########.fr       */
+/*   Updated: 2020/10/21 15:37:33 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ char* ft_strdup(const char *str);
 /*
  * bonus
  */
+# ifdef LIBASM_TEST_BONUS
 int ft_atoi_base(const char *str, const char *base);
 
 typedef struct		s_list
@@ -54,6 +55,7 @@ int  ft_list_size(t_list *begin_list);
 void ft_list_sort(t_list **begin_list, int (*cmp)());
 void ft_list_remove_if(t_list **begin_list, void *data_ref,
 					   int (*cmp)(), void (*free_fct)(void *));
+# endif
 
 /*
  * test_functions
@@ -65,11 +67,13 @@ void ft_write_test(void);
 void ft_read_test(void);
 void ft_strdup_test(void);
 
+# ifdef LIBASM_TEST_BONUS
 void ft_atoi_base_test(void);
 void ft_list_push_front_test(void);
 void ft_list_size_test(void);
 void ft_list_sort_test(void);
 void ft_list_remove_if_test(void);
+# endif
 
 
 /*
@@ -78,6 +82,7 @@ void ft_list_remove_if_test(void);
 void print_ok(void);
 void print_signaled_ko(void);
 
+# ifdef LIBASM_TEST_BONUS
 int*    create_data_elem(int data);
 t_list* create_elem(int data);
 t_list* list_from_format(char *fmt);
@@ -85,22 +90,25 @@ t_list* list_dup(t_list *list);
 int     list_cmp(t_list *l1, t_list *l2);
 void    list_print(t_list *list);
 void    list_destroy(t_list *list);
+# endif
 
 /*
  * function of reference
  */
+# ifdef LIBASM_TEST_BONUS
 int  ref_ft_atoi_base(char *str, char *base);
 void ref_ft_list_push_front(t_list **begin_list, void *data);
 int  ref_ft_list_size(t_list *begin_list);
 void ref_ft_list_sort(t_list **begin_list, int (*cmp)());
 void ref_ft_list_remove_if(t_list **begin_list, void *data_ref,
 							int (*cmp)(), void (*free_fct)(void *));
+# endif
 
 /*
  * segfault tester
  */
-int  pid;
-bool signaled;
+extern int  pid;
+extern bool signaled;
 
 # define TEST_SEGFAULT(x) do {           \
 	if ((pid = fork()) < 0)              \
@@ -114,7 +122,7 @@ bool signaled;
 	}                                    \
 } while(0)
 
-char *test_name;
+extern char *test_name;
 
 # define TEST_ASM_FUNCTION(x) do {       \
 	TEST_SEGFAULT(x);                    \

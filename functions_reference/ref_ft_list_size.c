@@ -6,11 +6,13 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:20:11 by cacharle          #+#    #+#             */
-/*   Updated: 2020/04/13 15:00:42 by charles          ###   ########.fr       */
+/*   Updated: 2020/10/21 15:28:41 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm_test.h"
+
+#ifdef LIBASM_TEST_BONUS
 
 int ref_ft_list_size(t_list *begin_list)
 {
@@ -24,3 +26,5 @@ int ref_ft_list_size(t_list *begin_list)
 	}
 	return counter;
 }
+
+#endif

@@ -6,11 +6,15 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:06:45 by cacharle          #+#    #+#             */
-/*   Updated: 2020/10/06 15:04:34 by cacharle         ###   ########.fr       */
+/*   Updated: 2020/10/21 15:37:28 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm_test.h"
+
+int  pid;
+bool signaled;
+char *test_name;
 
 int main(void)
 {
