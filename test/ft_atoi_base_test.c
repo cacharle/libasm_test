@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:07:27 by cacharle          #+#    #+#             */
-/*   Updated: 2020/04/13 14:52:28 by charles          ###   ########.fr       */
+/*   Updated: 2020/10/21 16:01:31 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static int expected_ret;
 static int actual_ret;
+
+#define TO_STRING(x) (#x)
 
 #define FT_ATOI_BASE_EXPECT(str, base) do {      \
 	actual_ret = ft_atoi_base(str, base);        \

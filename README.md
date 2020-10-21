@@ -1,4 +1,4 @@
-# libasm test
+# libasm\_test
 
 Unit tests for the libasm project.
 
@@ -8,12 +8,16 @@ Unit tests for the libasm project.
 
 The default path to your libasm is `../libasm`. You can modify it in the Makefile.
 
-- `> make run` show regular pretty output.
-- `> make run_raw` show parsable output.
+```
+$ make
+```
 
-### Bonus
+## Bonus
 
-Suffix all Makefile commands with `bonus` (i.e `> make runbonus`).
+Set the environment variable `LIBASM_TEST_BONUS` to `yes`.
+```
+$ echo 'export LIBASM_TEST_BONUS=yes' >> ~/.zshrc
+```
 
 ## Help, ft\_write and ft\_read crash for no reason
 
