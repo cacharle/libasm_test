@@ -1,6 +1,6 @@
 # libasm\_test
 
-Unit tests for the libasm project.
+Test for the libasm project of school 42.
 
 ![example\_screenshot](./screenshot.png)
 
@@ -8,14 +8,20 @@ Unit tests for the libasm project.
 
 The default path to your libasm is `../libasm`. You can modify it in the Makefile.
 
-```
+```sh
 $ make
 ```
 
 ## Bonus
 
-Set the environment variable `LIBASM_TEST_BONUS` to `yes`.
+```sh
+$ make bonus
 ```
+
+Or:
+
+Set the environment variable `LIBASM_TEST_BONUS` to `yes`.
+```sh
 $ echo 'export LIBASM_TEST_BONUS=yes' >> ~/.zshrc
 ```
 
