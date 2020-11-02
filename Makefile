@@ -6,7 +6,7 @@
 #    By: cacharle <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/08 03:06:59 by cacharle          #+#    #+#              #
-#    Updated: 2020/10/21 16:36:37 by charles          ###   ########.fr        #
+#    Updated: 2020/11/02 19:53:57 by charles          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,9 +42,11 @@ SRCBONUS = helper_list.c \
 		   functions_reference/ref_ft_list_sort.c \
 		   functions_reference/ref_ft_list_remove_if.c
 
+LIBASM_ALL = all
 ifeq ($(LIBASM_TEST_BONUS),yes)
 	SRC += $(SRCBONUS)
 	CCFLAGS += -D LIBASM_TEST_BONUS
+	LIBASM_ALL = bonus
 endif
 
 OBJ = $(SRC:.c=.o)
@@ -78,7 +80,7 @@ re: libasm_fclean libasm_all fclean all
 
 
 libasm_all:
-	$(MAKE) -C $(LIBASM_PATH) all
+	$(MAKE) -C $(LIBASM_PATH) $(LIBASM_ALL)
 
 libasm_fclean:
 	$(MAKE) -C $(LIBASM_PATH) fclean
