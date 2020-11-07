@@ -6,13 +6,11 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 02:49:28 by cacharle          #+#    #+#             */
-/*   Updated: 2020/10/21 15:28:30 by charles          ###   ########.fr       */
+/*   Updated: 2020/11/07 17:17:13 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm_test.h"
-
-#ifdef LIBASM_TEST_BONUS
 
 static
 t_list* merge_sorted_list(t_list* l1, t_list* l2, int (*cmp)(void *, void*))
@@ -59,5 +57,3 @@ void ref_ft_list_sort(t_list **begin_list, int (*cmp)(void *, void*))
 	ref_ft_list_sort(&middle, cmp);
 	*begin_list = merge_sorted_list(*begin_list, middle, cmp);
 }
-
-#endif

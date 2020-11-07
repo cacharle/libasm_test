@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:07:27 by cacharle          #+#    #+#             */
-/*   Updated: 2020/10/21 16:01:31 by charles          ###   ########.fr       */
+/*   Updated: 2020/11/07 17:12:55 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,8 +144,8 @@ void ft_atoi_base_compare(void)
 void ft_atoi_base_test(void)
 {
 	test_name = "ft_atoi_base.s";
-
+	signaled_suite = false;
 	ft_atoi_base_segfault();
-	if (!signaled)
+	if (!signaled_suite)
 		ft_atoi_base_compare();
 }

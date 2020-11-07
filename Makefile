@@ -6,13 +6,13 @@
 #    By: cacharle <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/08 03:06:59 by cacharle          #+#    #+#              #
-#    Updated: 2020/11/02 20:01:39 by charles          ###   ########.fr        #
+#    Updated: 2020/11/07 17:19:11 by charles          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 LIBASM_PATH = ../libasm
 
-RM = rm -f
+RM = rm -fv
 MAKE = make --no-print-directory
 PYTHON = python3
 

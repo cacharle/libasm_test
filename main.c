@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:06:45 by cacharle          #+#    #+#             */
-/*   Updated: 2020/10/21 15:37:28 by charles          ###   ########.fr       */
+/*   Updated: 2020/11/07 17:13:43 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int  pid;
 bool signaled;
+bool signaled_suite;
 char *test_name;
 
 int main(void)
@@ -21,10 +22,8 @@ int main(void)
 	ft_strlen_test();
 	ft_strcpy_test();
 	ft_strcmp_test();
-#ifndef __linux__
 	ft_write_test();
 	ft_read_test();
-#endif
 	ft_strdup_test();
 
 #ifdef LIBASM_TEST_BONUS

@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:08:24 by cacharle          #+#    #+#             */
-/*   Updated: 2020/04/13 14:57:14 by charles          ###   ########.fr       */
+/*   Updated: 2020/11/07 17:15:43 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ void ft_list_push_front_compare(void)
 void ft_list_push_front_test(void)
 {
 	test_name = "ft_list_push_front.s";
+	signaled_suite = false;
 	ft_list_push_front_segfault();
-	if (!signaled)
+	if (!signaled_suite)
 		ft_list_push_front_compare();
 }

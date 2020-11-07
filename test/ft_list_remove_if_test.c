@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:08:42 by cacharle          #+#    #+#             */
-/*   Updated: 2020/04/13 14:59:22 by charles          ###   ########.fr       */
+/*   Updated: 2020/11/07 17:15:34 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ void ft_list_remove_if_compare(void)
 void ft_list_remove_if_test(void)
 {
 	test_name = "ft_list_remove_if.s";
+	signaled_suite = false;
 	ft_list_remove_if_segfault();
-	if (!signaled)
+	if (!signaled_suite)
 		ft_list_remove_if_compare();
 }

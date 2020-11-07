@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:07:48 by cacharle          #+#    #+#             */
-/*   Updated: 2020/10/06 14:40:00 by cacharle         ###   ########.fr       */
+/*   Updated: 2020/11/07 17:15:12 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ tortor, sit amet consequat amet.");
 void ft_write_test(void)
 {
 	test_name = "ft_write.s";
-
+	signaled_suite = false;
 	ft_write_test_segfault();
-	if (!signaled)
+	if (!signaled_suite)
 		ft_write_test_compare();
 }

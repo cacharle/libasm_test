@@ -6,14 +6,12 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:20:16 by cacharle          #+#    #+#             */
-/*   Updated: 2020/10/21 15:29:23 by charles          ###   ########.fr       */
+/*   Updated: 2020/11/07 17:17:01 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ctype.h>
 #include "libasm_test.h"
-
-#ifdef LIBASM_TEST_BONUS
 
 static
 bool valid_base(char *base)
@@ -56,5 +54,3 @@ int ref_ft_atoi_base(char *str, char *base)
 	}
 	return is_negative ? -nb : nb;
 }
-
-#endif

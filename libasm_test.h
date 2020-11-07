@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:07:19 by cacharle          #+#    #+#             */
-/*   Updated: 2020/10/21 15:37:33 by charles          ###   ########.fr       */
+/*   Updated: 2020/11/07 17:13:23 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,17 +109,19 @@ void ref_ft_list_remove_if(t_list **begin_list, void *data_ref,
  */
 extern int  pid;
 extern bool signaled;
+extern bool signaled_suite;
 
-# define TEST_SEGFAULT(x) do {           \
-	if ((pid = fork()) < 0)              \
-		exit(EXIT_FAILURE);              \
-	if (pid == 0) {                      \
-		do { x; } while(0);              \
-		exit(EXIT_SUCCESS);              \
-	} else {                             \
-		wait(&pid);                      \
-		signaled = WIFSIGNALED(pid);     \
-	}                                    \
+# define TEST_SEGFAULT(x) do {               \
+	if ((pid = fork()) < 0)                  \
+		exit(EXIT_FAILURE);                  \
+	if (pid == 0) {                          \
+		do { x; } while(0);                  \
+		exit(EXIT_SUCCESS);                  \
+	} else {                                 \
+		wait(&pid);                          \
+		signaled = WIFSIGNALED(pid);         \
+		if (signaled) signaled_suite = true; \
+	}                                        \
 } while(0)
 
 extern char *test_name;

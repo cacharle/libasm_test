@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:07:44 by cacharle          #+#    #+#             */
-/*   Updated: 2020/10/06 15:05:51 by cacharle         ###   ########.fr       */
+/*   Updated: 2020/11/07 17:15:02 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ tortor, sit amet consequat amet.");
 void ft_read_test(void)
 {
 	test_name = "ft_read.s";
-
+	signaled_suite = false;
 	ft_read_test_segfault();
-	if (!signaled)
+	if (!signaled_suite)
 		ft_read_test_compare();
 }

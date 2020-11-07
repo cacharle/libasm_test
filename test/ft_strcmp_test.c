@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:08:03 by cacharle          #+#    #+#             */
-/*   Updated: 2020/04/13 14:44:18 by charles          ###   ########.fr       */
+/*   Updated: 2020/11/07 17:14:40 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,8 @@ tortor, sit amet consequat amet.");
 void ft_strcmp_test(void)
 {
 	test_name = "ft_strcmp.s";
-
+	signaled_suite = false;
 	ft_strcmp_test_segfault();
-	if (!signaled)
+	if (!signaled_suite)
 		ft_strcmp_test_compare();
 }
