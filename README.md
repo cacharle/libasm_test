@@ -34,7 +34,7 @@ $ echo 'export LIBASM_TEST_BONUS=yes' >> ~/.zshrc
 To fix the `relocation R_X86_64_PC32 against symbol` error you can add inside your
 libasm source code `wrt ..plt` after a call to a libc function, like example below:
 
-```
+```asm
     ...
     call __errno_location wrt ..plt
     ...
