@@ -25,11 +25,13 @@ Set the environment variable `LIBASM_TEST_BONUS` to `yes`.
 $ echo 'export LIBASM_TEST_BONUS=yes' >> ~/.zshrc
 ```
 
-## Help, ft\_write and ft\_read crash for no reason
+## Common issues
+
+### ft\_write and ft\_read crash
 
 <https://stackoverflow.com/c/42network/questions/1494>
 
-## Compilation on linux with gcc
+### Compilation on linux with gcc
 
 To fix the `relocation R_X86_64_PC32 against symbol` error you can add inside your
 libasm source code `wrt ..plt` after a call to a libc function, like example below:
