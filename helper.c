@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:07:07 by cacharle          #+#    #+#             */
-/*   Updated: 2020/04/13 15:01:20 by charles          ###   ########.fr       */
+/*   Updated: 2020/12/09 12:52:33 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void print_ok(void)
 	fflush(stdout);
 }
 
-void print_signaled_ko(void)
+void print_signaled_ko(const char *code)
 {
-	printf("KO: [SEGFAULT]: %s\n", test_name);
+	printf("KO: [SEGFAULT]: %s: with: %s\n", test_name, code);
 	fflush(stdout);
 }

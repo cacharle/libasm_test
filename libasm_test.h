@@ -6,7 +6,7 @@
 /*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:07:19 by cacharle          #+#    #+#             */
-/*   Updated: 2020/11/07 17:13:23 by charles          ###   ########.fr       */
+/*   Updated: 2020/12/09 12:53:01 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void ft_list_remove_if_test(void);
  * helpers
  */
 void print_ok(void);
-void print_signaled_ko(void);
+void print_signaled_ko(const char *code);
 
 # ifdef LIBASM_TEST_BONUS
 int*    create_data_elem(int data);
@@ -129,7 +129,7 @@ extern char *test_name;
 # define TEST_ASM_FUNCTION(x) do {       \
 	TEST_SEGFAULT(x);                    \
 	if (signaled)                        \
-		print_signaled_ko();             \
+		print_signaled_ko(#x);           \
 	else                                 \
 		print_ok();                      \
 } while(0)

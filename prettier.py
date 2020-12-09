@@ -6,7 +6,7 @@
 #    By: cacharle <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/05 23:04:13 by cacharle          #+#    #+#              #
-#    Updated: 2020/05/04 14:44:44 by charles          ###   ########.fr        #
+#    Updated: 2020/12/09 12:56:07 by charles          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ def parse():
             continue
         m = None
         if line.find("SEGFAULT") != -1:
-            name = line[4:]
+            name = line[4:line.find("with")]
         else:
             m = re.search("^KO: \[COMPARE\]: (.*): expected: (.*) got: (.*)( with: .*)?$", line)
             if m is None:
@@ -65,7 +65,7 @@ def parse():
                 "type": "SEGFAULT",
                 "expected": None,
                 "actual": None,
-                "with": None
+                "with": line[line.find("with:") + len("with:"):]
             })
         else:
             l["ko_info"].append({
