@@ -6,7 +6,7 @@
 #    By: cacharle <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/05 23:04:13 by cacharle          #+#    #+#              #
-#    Updated: 2020/12/09 12:56:07 by charles          ###   ########.fr        #
+#    Updated: 2020/12/09 13:05:13 by charles          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,7 @@ if __name__ == "__main__":
     for k, v in logs.items():
         for e in v["ko_info"]:
             if e['type'] == "SEGFAULT":
-                print("{} : {}".format(k, red('SEGFAULT')))
+                print("{} : {}: {}".format(k, red('SEGFAULT'), e['with']))
             elif e['type'] == "COMPARE":
                 p = str(k)
                 if e["with"] is not None:
