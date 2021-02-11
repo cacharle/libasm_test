@@ -2,7 +2,7 @@
 
 Test for the libasm project of school 42.
 
-![example\_screenshot](./screenshot.png)
+![preview](https://i.imgur.com/xpnwP0y.png)
 
 ## Usage
 
