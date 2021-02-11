@@ -2,3 +2,4 @@
 *.ghc
 a.out
 runtest
+tags

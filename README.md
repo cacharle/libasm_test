@@ -14,6 +14,8 @@ $ make
 
 ## Bonus
 
+**You need to `make fclean` when switching from all to bonus**.
+
 ```sh
 $ make bonus
 ```
