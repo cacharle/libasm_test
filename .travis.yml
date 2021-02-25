@@ -1,0 +1,23 @@
+language: c
+
+os:
+  - linux
+  - osx
+
+addons:
+  apt:
+    install:
+      - python3
+      - nasm
+
+before_install:
+  - [ "$TRAVIS_OS_NAME" = "osx" ] && brew update
+  - [ "$TRAVIS_OS_NAME" = "osx" ] && brew install nasm
+  - [ "$TRAVIS_OS_NAME" = "osx" ] && brew install python3
+
+install:
+  - git clone git://git.cacharle.xyz/libasm ../libasm
+
+script:
+  - ls -l . ..
+  - make bonus
